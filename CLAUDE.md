@@ -6,7 +6,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 n8n-mcp is a comprehensive documentation and knowledge server that provides AI assistants with complete access to n8n node information through the Model Context Protocol (MCP). It serves as a bridge between n8n's workflow automation platform and AI models, enabling them to understand and work with n8n nodes effectively.
 
-## ✅ Latest Updates (v2.7.6)
+## ✅ Latest Updates (v2.8.1)
+
+### Update (v2.8.1) - n8n Compatibility Mode for Strict Schema Validation:
+- ✅ **NEW: N8N_COMPATIBILITY_MODE** - Enable strict schema validation for n8n's MCP Client Tool
+- ✅ **FIXED: Schema validation errors** - "Received tool input did not match expected schema" error in n8n
+- ✅ **ENHANCED: Schema strictness** - All tools have `additionalProperties: false` in compatibility mode
+- ✅ **SEPARATE TOOL FILES** - Clean architecture with separate n8n-compatible tool definitions
+- ✅ **ENVIRONMENT TOGGLE** - Set `N8N_COMPATIBILITY_MODE=true` to enable strict schemas
+- ✅ **BACKWARD COMPATIBLE**: Defaults to standard mode when not configured
+
+### Update (v2.8.0) - SSE (Server-Sent Events) Support for n8n Integration:
+- ✅ **NEW: SSE mode** - Full Server-Sent Events implementation for n8n MCP Server Trigger
+- ✅ **NEW: Real-time streaming** - Push-based event streaming from server to n8n workflows
+- ✅ **NEW: Async tool execution** - Better support for long-running operations
+- ✅ **NEW: Session management** - Handle multiple concurrent n8n connections
+- ✅ **NEW: Keep-alive mechanism** - Automatic connection maintenance with 30s pings
+- ✅ **ADDED: SSE endpoints** - `/sse` for event stream, `/mcp/message` for requests
+- ✅ **BACKWARD COMPATIBLE** - Legacy `/mcp` endpoint continues to work
+- ✅ **Docker support** - New `docker-compose.sse.yml` for easy deployment
+- ✅ **Complete documentation** - See [SSE_IMPLEMENTATION.md](./docs/SSE_IMPLEMENTATION.md)
 
 ### Update (v2.7.6) - Trust Proxy Support for Correct IP Logging:
 - ✅ **NEW: TRUST_PROXY support** - Log real client IPs when behind reverse proxy
@@ -490,6 +509,10 @@ AUTH_TOKEN=your-secure-token
 # Trust proxy for correct IP logging (optional)
 # Set to 1 when behind a reverse proxy (Nginx, etc.)
 TRUST_PROXY=0
+
+# n8n Compatibility Mode (optional)
+# Enable strict schema validation for n8n's MCP Client Tool
+N8N_COMPATIBILITY_MODE=false
 
 # MCP Configuration  
 MCP_SERVER_NAME=n8n-documentation-mcp

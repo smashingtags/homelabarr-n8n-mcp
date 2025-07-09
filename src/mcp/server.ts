@@ -4,11 +4,14 @@ import {
   CallToolRequestSchema, 
   ListToolsRequestSchema,
   InitializeRequestSchema,
+  DEFAULT_NEGOTIATED_PROTOCOL_VERSION,
 } from '@modelcontextprotocol/sdk/types.js';
 import { existsSync } from 'fs';
 import path from 'path';
 import { n8nDocumentationToolsFinal } from './tools';
 import { n8nManagementTools } from './tools-n8n-manager';
+import { n8nDocumentationToolsFinal as n8nCompatTools } from './tools-n8n-compat';
+import { n8nManagementTools as n8nCompatManagementTools } from './tools-n8n-manager-compat';
 import { logger } from '../utils/logger';
 import { NodeRepository } from '../database/node-repository';
 import { DatabaseAdapter, createDatabaseAdapter } from '../database/database-adapter';
@@ -52,8 +55,12 @@ export class N8NDocumentationMCPServer {
   private templateService: TemplateService | null = null;
   private initialized: Promise<void>;
   private cache = new SimpleCache();
+  private isN8nCompatMode: boolean;
 
   constructor() {
+    // Check for n8n compatibility mode
+    this.isN8nCompatMode = process.env.N8N_COMPATIBILITY_MODE === 'true';
+    
     // Try multiple database paths
     const possiblePaths = [
       path.join(process.cwd(), 'data', 'nodes.db'),
@@ -77,15 +84,19 @@ export class N8NDocumentationMCPServer {
     // Initialize database asynchronously
     this.initialized = this.initializeDatabase(dbPath);
     
-    logger.info('Initializing n8n Documentation MCP server');
+    logger.info('Initializing n8n Documentation MCP server', { 
+      n8nCompatMode: this.isN8nCompatMode 
+    });
     
     // Log n8n API configuration status at startup
     const apiConfigured = isN8nApiConfigured();
+    const docTools = this.isN8nCompatMode ? n8nCompatTools : n8nDocumentationToolsFinal;
+    const mgmtTools = this.isN8nCompatMode ? n8nCompatManagementTools : n8nManagementTools;
     const totalTools = apiConfigured ? 
-      n8nDocumentationToolsFinal.length + n8nManagementTools.length : 
-      n8nDocumentationToolsFinal.length;
+      docTools.length + mgmtTools.length : 
+      docTools.length;
     
-    logger.info(`MCP server initialized with ${totalTools} tools (n8n API: ${apiConfigured ? 'configured' : 'not configured'})`);
+    logger.info(`MCP server initialized with ${totalTools} tools (n8n API: ${apiConfigured ? 'configured' : 'not configured'}, compatibility mode: ${this.isN8nCompatMode})`);
     
     this.server = new Server(
       {
@@ -125,7 +136,7 @@ export class N8NDocumentationMCPServer {
     // Handle initialization
     this.server.setRequestHandler(InitializeRequestSchema, async () => {
       const response = {
-        protocolVersion: '2024-11-05',
+        protocolVersion: DEFAULT_NEGOTIATED_PROTOCOL_VERSION,
         capabilities: {
           tools: {},
         },
@@ -145,13 +156,17 @@ export class N8NDocumentationMCPServer {
 
     // Handle tool listing
     this.server.setRequestHandler(ListToolsRequestSchema, async () => {
+      // Use compatibility mode tools if enabled
+      const docTools = this.isN8nCompatMode ? n8nCompatTools : n8nDocumentationToolsFinal;
+      const mgmtTools = this.isN8nCompatMode ? n8nCompatManagementTools : n8nManagementTools;
+      
       // Combine documentation tools with management tools if API is configured
-      const tools = [...n8nDocumentationToolsFinal];
+      const tools = [...docTools];
       const isConfigured = isN8nApiConfigured();
       
       if (isConfigured) {
-        tools.push(...n8nManagementTools);
-        logger.debug(`Tool listing: ${tools.length} tools available (${n8nDocumentationToolsFinal.length} documentation + ${n8nManagementTools.length} management)`);
+        tools.push(...mgmtTools);
+        logger.debug(`Tool listing: ${tools.length} tools available (${docTools.length} documentation + ${mgmtTools.length} management)`);
       } else {
         logger.debug(`Tool listing: ${tools.length} tools available (documentation only)`);
       }
@@ -193,13 +208,16 @@ export class N8NDocumentationMCPServer {
   async executeTool(name: string, args: any): Promise<any> {
     switch (name) {
       case 'tools_documentation':
-        return this.getToolsDocumentation(args.topic, args.depth);
+        return this.getToolsDocumentation(args.topic || undefined, args.depth || 'essentials');
       case 'list_nodes':
-        return this.listNodes(args);
+        return this.listNodes({
+          ...args,
+          limit: args.limit || 50
+        });
       case 'get_node_info':
         return this.getNodeInfo(args.nodeType);
       case 'search_nodes':
-        return this.searchNodes(args.query, args.limit);
+        return this.searchNodes(args.query, args.limit || 20);
       case 'list_ai_tools':
         return this.listAITools();
       case 'get_node_documentation':

@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753786133874,
+  "lastUpdate": 1753787383097,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -283,6 +283,58 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/c824fb5ebfc1ecddb8c23324f126add487b8a0f1"
         },
         "date": 1753786133468,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0135,
+            "unit": "ms",
+            "range": 0.21789999999999998,
+            "extra": "74100 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 2.3265,
+            "unit": "ms",
+            "range": 0.8298999999999999,
+            "extra": "430 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0032,
+            "unit": "ms",
+            "range": 0.26320000000000005,
+            "extra": "309346 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0476,
+            "unit": "ms",
+            "range": 0.30010000000000003,
+            "extra": "20994 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "115bb6f36ca390a79e629290ab09f99cb4bdf02a",
+          "message": "fix: resolve test hang issues in CI\n\n- Fixed MSW event listener memory leaks\n- Added proper database connection cleanup\n- Fixed MSW server lifecycle management\n- Reduced global test timeout to 30s for faster failure detection\n- Added resource cleanup in all integration tests\n\nThis should resolve the GitHub Actions test hanging issue",
+          "timestamp": "2025-07-29T13:07:51+02:00",
+          "tree_id": "faa826b5f6755b1c035094410ec6f33727fb037d",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/115bb6f36ca390a79e629290ab09f99cb4bdf02a"
+        },
+        "date": 1753787382452,
         "tool": "customSmallerIsBetter",
         "benches": [
           {

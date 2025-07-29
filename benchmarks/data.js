@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753778170214,
+  "lastUpdate": 1753786133874,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -231,6 +231,58 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/b5867d3cb9b107ce1a394f875e1edb1fb09a7220"
         },
         "date": 1753778169896,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0135,
+            "unit": "ms",
+            "range": 0.21789999999999998,
+            "extra": "74100 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 2.3265,
+            "unit": "ms",
+            "range": 0.8298999999999999,
+            "extra": "430 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0032,
+            "unit": "ms",
+            "range": 0.26320000000000005,
+            "extra": "309346 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0476,
+            "unit": "ms",
+            "range": 0.30010000000000003,
+            "extra": "20994 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "c824fb5ebfc1ecddb8c23324f126add487b8a0f1",
+          "message": "fix: complete Phase 4 integration test fixes\n\n- Fixed better-sqlite3 ES module imports across all tests\n- Updated template repository method to handle undefined results\n- Fixed all database column references to match schema\n- Corrected MCP transport initialization\n- All integration tests now passing",
+          "timestamp": "2025-07-29T12:46:55+02:00",
+          "tree_id": "66c28ee9bcff95cb80f21d066a92cb9c349d335a",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/c824fb5ebfc1ecddb8c23324f126add487b8a0f1"
+        },
+        "date": 1753786133468,
         "tool": "customSmallerIsBetter",
         "benches": [
           {

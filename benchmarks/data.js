@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753814164210,
+  "lastUpdate": 1753816490340,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -543,6 +543,58 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/6a231375d53c6fc83fcbbb7b78e778a5bd3338b7"
         },
         "date": 1753814163928,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0135,
+            "unit": "ms",
+            "range": 0.21789999999999998,
+            "extra": "74100 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 2.3265,
+            "unit": "ms",
+            "range": 0.8298999999999999,
+            "extra": "430 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0032,
+            "unit": "ms",
+            "range": 0.26320000000000005,
+            "extra": "309346 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0476,
+            "unit": "ms",
+            "range": 0.30010000000000003,
+            "extra": "20994 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "7438ec950db1e7d1aa287ff8464a58be03169e1c",
+          "message": "fix: resolve TypeScript lint errors in integration tests\n\n- Fixed all 39 TypeScript errors about 'response.content' being of type 'unknown'\n- Changed type assertions from 'response.content[0] as any' to '(response as any).content[0]'\n- All tests pass and lint check is now clean\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-07-29T21:13:12+02:00",
+          "tree_id": "ce959f5c1ee9e337657d6a35df0055875a00dfe7",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/7438ec950db1e7d1aa287ff8464a58be03169e1c"
+        },
+        "date": 1753816489866,
         "tool": "customSmallerIsBetter",
         "benches": [
           {

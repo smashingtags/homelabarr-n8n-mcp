@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753790071396,
+  "lastUpdate": 1753792261101,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -387,6 +387,58 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/b9eda61729325be4c2caad56b060c28f7c7f89ac"
         },
         "date": 1753790071137,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0135,
+            "unit": "ms",
+            "range": 0.21789999999999998,
+            "extra": "74100 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 2.3265,
+            "unit": "ms",
+            "range": 0.8298999999999999,
+            "extra": "430 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0032,
+            "unit": "ms",
+            "range": 0.26320000000000005,
+            "extra": "309346 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0476,
+            "unit": "ms",
+            "range": 0.30010000000000003,
+            "extra": "20994 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "c5e012f601a1a16d026139f5a802b10359156285",
+          "message": "fix: resolve test hanging issue by separating MSW setup\n\n- Removed MSW from global vitest config setupFiles\n- Created separate vitest.config.integration.ts for integration tests\n- Integration tests now load MSW only when needed via integration-setup.ts\n- Fixed failing template repository test by updating test data\n- Disabled coverage for integration tests to prevent threshold failures\n- Both unit and integration tests now exit cleanly without hanging\n\nThis separation ensures unit tests run quickly without MSW overhead\nwhile integration tests have full MSW support when needed.\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-07-29T14:27:54+02:00",
+          "tree_id": "34eb286155c88581f651c5b41305b7980182f2f9",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/c5e012f601a1a16d026139f5a802b10359156285"
+        },
+        "date": 1753792260422,
         "tool": "customSmallerIsBetter",
         "benches": [
           {

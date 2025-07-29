@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753787383097,
+  "lastUpdate": 1753790071396,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -335,6 +335,58 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/115bb6f36ca390a79e629290ab09f99cb4bdf02a"
         },
         "date": 1753787382452,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0135,
+            "unit": "ms",
+            "range": 0.21789999999999998,
+            "extra": "74100 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 2.3265,
+            "unit": "ms",
+            "range": 0.8298999999999999,
+            "extra": "430 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0032,
+            "unit": "ms",
+            "range": 0.26320000000000005,
+            "extra": "309346 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0476,
+            "unit": "ms",
+            "range": 0.30010000000000003,
+            "extra": "20994 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "b9eda61729325be4c2caad56b060c28f7c7f89ac",
+          "message": "fix: resolve test hanging issue in CI\n\n- Reduce CI reporters to prevent resource contention (removed json/html)\n- Optimize coverage settings with all:false and skipFull:true\n- Fix MSW waitForRequest memory leak by adding timeout and cleanup\n- Add teardownTimeout to vitest config\n- Add 10-minute timeout to GitHub Actions job\n- Create emergency test script without coverage for debugging\n\nThe main issues were:\n1. Coverage collection with multiple reporters causing exhaustion\n2. MSW event listener that could hang indefinitely\n3. Too many simultaneous reporters (4 at once)\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-07-29T13:40:18+02:00",
+          "tree_id": "9f916815f5237d0cc19a68da37fa158ea2a3c25e",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/b9eda61729325be4c2caad56b060c28f7c7f89ac"
+        },
+        "date": 1753790071137,
         "tool": "customSmallerIsBetter",
         "benches": [
           {

@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753775367404,
+  "lastUpdate": 1753775570502,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -127,6 +127,58 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/253b51f5c6024fe94bb84a6560e591a6bc25857f"
         },
         "date": 1753775367107,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0135,
+            "unit": "ms",
+            "range": 0.21789999999999998,
+            "extra": "74100 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 2.3265,
+            "unit": "ms",
+            "range": 0.8298999999999999,
+            "extra": "430 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0032,
+            "unit": "ms",
+            "range": 0.26320000000000005,
+            "extra": "309346 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0476,
+            "unit": "ms",
+            "range": 0.30010000000000003,
+            "extra": "20994 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "9470986650b097288f18db653a809d147c896fab",
+          "message": "test: add template repository and performance integration tests\n\n- Add comprehensive TemplateRepository integration tests\n- Test FTS5 functionality with templates\n- Add performance benchmarks for database operations\n- Test concurrent read/write operations\n- Measure memory usage and query performance\n- Verify index optimization and WAL mode benefits\n- Include bulk operation performance tests\n\nPart of Phase 4: Integration Testing",
+          "timestamp": "2025-07-29T09:51:13+02:00",
+          "tree_id": "3ad46519a211e2d262db4d1625d225c799e6c0c7",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/9470986650b097288f18db653a809d147c896fab"
+        },
+        "date": 1753775570209,
         "tool": "customSmallerIsBetter",
         "benches": [
           {

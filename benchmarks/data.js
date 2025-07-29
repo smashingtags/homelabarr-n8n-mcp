@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753792261101,
+  "lastUpdate": 1753805454616,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -439,6 +439,58 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/c5e012f601a1a16d026139f5a802b10359156285"
         },
         "date": 1753792260422,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0135,
+            "unit": "ms",
+            "range": 0.21789999999999998,
+            "extra": "74100 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 2.3265,
+            "unit": "ms",
+            "range": 0.8298999999999999,
+            "extra": "430 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0032,
+            "unit": "ms",
+            "range": 0.26320000000000005,
+            "extra": "309346 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0476,
+            "unit": "ms",
+            "range": 0.30010000000000003,
+            "extra": "20994 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "e405346b3edee3008bbb98ca35071e0aaa4d0601",
+          "message": "fix: resolve all TypeScript and lint errors in integration tests\n\n- Fixed InMemoryTransport destructuring (object → array)\n- Updated all callTool calls to new object syntax\n- Changed getServerInfo() to getServerVersion()\n- Added type assertions for response objects\n- Fixed import paths and missing imports\n- Corrected template and performance test type issues\n- All 56 TypeScript errors resolved\n\nBoth 'npm run lint' and 'npm run typecheck' now pass successfully",
+          "timestamp": "2025-07-29T18:09:03+02:00",
+          "tree_id": "e207b291fabdad62387b24e87e658eb13ad78051",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/e405346b3edee3008bbb98ca35071e0aaa4d0601"
+        },
+        "date": 1753805454300,
         "tool": "customSmallerIsBetter",
         "benches": [
           {

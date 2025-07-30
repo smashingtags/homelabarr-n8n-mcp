@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753862118737,
+  "lastUpdate": 1753862387157,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -832,6 +832,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3066,
             "extra": "15181 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "ced38b2f8a49f91e0ba4004ab242f13363c1a6d5",
+          "message": "This PR implements a comprehensive testing infrastructure for n8n-MCP, adding 1,182 tests to ensure code quality and reliability.",
+          "timestamp": "2025-07-30T07:16:02Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/104/commits/ced38b2f8a49f91e0ba4004ab242f13363c1a6d5"
+        },
+        "date": 1753862386886,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0187,
+            "unit": "ms",
+            "range": 0.27199999999999996,
+            "extra": "53615 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1447,
+            "unit": "ms",
+            "range": 0.5281000000000002,
+            "extra": "318 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0046,
+            "unit": "ms",
+            "range": 0.2594,
+            "extra": "215484 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0661,
+            "unit": "ms",
+            "range": 0.3047,
+            "extra": "15134 ops/sec"
           }
         ]
       }

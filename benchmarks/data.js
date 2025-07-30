@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753862387157,
+  "lastUpdate": 1753863300626,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -880,6 +880,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3047,
             "extra": "15134 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "ee9efd7849e9ef20d1da5c73138389bbd67a5b3b",
+          "message": "fix: resolve Docker build failures by copying tsconfig.build.json\n\n- Updated Dockerfile to copy all tsconfig*.json files (includes tsconfig.build.json)\n- Updated Dockerfile.railway with same fix\n- Changed standard Dockerfile to use 'tsc -p tsconfig.build.json' for consistency\n- This fixes the missing file errors preventing Docker builds in CI\n\nThe issue was that tsconfig.build.json was added for the testing infrastructure\nbut the Docker COPY commands were not updated to include it.\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-07-30T10:13:14+02:00",
+          "tree_id": "fd4b182dbb433551daf009419c65a4928d829546",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/ee9efd7849e9ef20d1da5c73138389bbd67a5b3b"
+        },
+        "date": 1753863300360,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.3651,
+            "extra": "53068 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1402,
+            "unit": "ms",
+            "range": 0.7529000000000003,
+            "extra": "318 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0051,
+            "unit": "ms",
+            "range": 0.5585,
+            "extra": "196612 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0674,
+            "unit": "ms",
+            "range": 0.37129999999999996,
+            "extra": "14845 ops/sec"
           }
         ]
       }

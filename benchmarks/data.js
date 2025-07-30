@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753883148117,
+  "lastUpdate": 1753883359699,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -1480,6 +1480,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.2725,
             "extra": "15239 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "4847fae1a1268a3a1b865b5d5bdc1e4801e8c9e3",
+          "message": "Merge pull request #104 from czlonkowski/feat/comprehensive-testing-suite\n\nThis PR implements a comprehensive testing infrastructure for n8n-MCP",
+          "timestamp": "2025-07-30T15:47:33+02:00",
+          "tree_id": "6b8507d1827d1865dc69e2e74945ce432f367de5",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/4847fae1a1268a3a1b865b5d5bdc1e4801e8c9e3"
+        },
+        "date": 1753883359395,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.2345,
+            "extra": "53123 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1176,
+            "unit": "ms",
+            "range": 0.4623000000000004,
+            "extra": "321 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0046,
+            "unit": "ms",
+            "range": 0.24130000000000001,
+            "extra": "216883 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0653,
+            "unit": "ms",
+            "range": 0.3465,
+            "extra": "15318 ops/sec"
           }
         ]
       }

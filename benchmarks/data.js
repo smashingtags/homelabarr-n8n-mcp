@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753863323631,
+  "lastUpdate": 1753863598002,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -980,6 +980,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3175,
             "extra": "15136 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "bd208e71f8e8de35b4ccf5bc669cad92a5bdb633",
+          "message": "fix: override test-related types in tsconfig.build.json for Docker builds\n\n- Override the 'types' array to only include 'node' types\n- Exclude 'types' directory and any nested types directories from build\n- Add comment explaining the types override rationale\n- This prevents TypeScript from looking for vitest/globals and test-env types\n\nThe issue was that tsconfig.build.json was inheriting test-related type\ndefinitions from tsconfig.json which aren't available in the minimal\nDocker build environment.\n\nCode reviewed and enhanced based on suggestions:\n- Added '**/types' to exclude pattern for comprehensive exclusion\n- Added explanatory comment for future maintainers\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-07-30T10:18:29+02:00",
+          "tree_id": "eff1e3a295be3450a88ee378478c118d7803ae20",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/bd208e71f8e8de35b4ccf5bc669cad92a5bdb633"
+        },
+        "date": 1753863597738,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0191,
+            "unit": "ms",
+            "range": 0.4264,
+            "extra": "52430 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1497,
+            "unit": "ms",
+            "range": 0.46119999999999983,
+            "extra": "317 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0047,
+            "unit": "ms",
+            "range": 0.2666,
+            "extra": "214393 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0668,
+            "unit": "ms",
+            "range": 0.3388,
+            "extra": "14967 ops/sec"
           }
         ]
       }

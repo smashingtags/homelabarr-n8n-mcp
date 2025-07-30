@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753878639249,
+  "lastUpdate": 1753883126115,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -1380,6 +1380,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3333,
             "extra": "14721 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "c36567875a6ca2499a4660332a93d390bdb465b7",
+          "message": "chore: bump version to 2.8.0\n\n- Update package.json version from 2.7.23 to 2.8.0\n- Update README.md test count from 1,182 to 1,356 tests\n- Add comprehensive CHANGELOG entry for v2.8.0\n- Document all test improvements and fixes from PR #104\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-07-30T15:43:48+02:00",
+          "tree_id": "6b8507d1827d1865dc69e2e74945ce432f367de5",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/c36567875a6ca2499a4660332a93d390bdb465b7"
+        },
+        "date": 1753883125428,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0189,
+            "unit": "ms",
+            "range": 0.2807,
+            "extra": "52881 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.2642,
+            "unit": "ms",
+            "range": 3.1914999999999996,
+            "extra": "306 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0049,
+            "unit": "ms",
+            "range": 0.2457,
+            "extra": "202642 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0672,
+            "unit": "ms",
+            "range": 0.3097,
+            "extra": "14887 ops/sec"
           }
         ]
       }

@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753861795716,
+  "lastUpdate": 1753862118737,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -780,6 +780,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3349,
             "extra": "15083 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "ced38b2f8a49f91e0ba4004ab242f13363c1a6d5",
+          "message": "feat: add comprehensive update script for n8n dependencies\n\n- Created update-and-publish-prep.sh script that automates entire update process\n- Script now runs all 1,182 tests before allowing updates\n- Automatically bumps version and updates README badges\n- Integrates with npm publish preparation workflow\n- Added 'npm run update:all' command for one-step updates\n- Updated MEMORY_N8N_UPDATE.md with new comprehensive process\n\nThe new workflow ensures:\n- All tests pass before version bump\n- README badges stay in sync\n- Consistent commit messages\n- Ready for npm publish after update\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-07-30T09:53:40+02:00",
+          "tree_id": "2e50363065ef1ed5fab578e9c71e694540be40c0",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/ced38b2f8a49f91e0ba4004ab242f13363c1a6d5"
+        },
+        "date": 1753862118107,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0189,
+            "unit": "ms",
+            "range": 0.37929999999999997,
+            "extra": "52952 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1335,
+            "unit": "ms",
+            "range": 0.5701999999999998,
+            "extra": "319 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0048,
+            "unit": "ms",
+            "range": 0.2901,
+            "extra": "207259 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0659,
+            "unit": "ms",
+            "range": 0.3066,
+            "extra": "15181 ops/sec"
           }
         ]
       }

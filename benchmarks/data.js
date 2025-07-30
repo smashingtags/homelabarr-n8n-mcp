@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753816490340,
+  "lastUpdate": 1753859343816,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -595,6 +595,58 @@ window.BENCHMARK_DATA = {
           "url": "https://github.com/czlonkowski/n8n-mcp/commit/7438ec950db1e7d1aa287ff8464a58be03169e1c"
         },
         "date": 1753816489866,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0135,
+            "unit": "ms",
+            "range": 0.21789999999999998,
+            "extra": "74100 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 2.3265,
+            "unit": "ms",
+            "range": 0.8298999999999999,
+            "extra": "430 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0032,
+            "unit": "ms",
+            "range": 0.26320000000000005,
+            "extra": "309346 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0476,
+            "unit": "ms",
+            "range": 0.30010000000000003,
+            "extra": "20994 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "f4c776f43bb6eff7f5ac51855a47121231a02e80",
+          "message": "fix: resolve all TypeScript lint errors\n\n- Fixed undefined variable reference in server.ts (possiblePaths)\n- Fixed type mismatches in database performance tests\n- Added proper type assertions for MCP response objects\n- Fixed TemplateNode interface compliance in tests\n\nAll TypeScript checks now pass successfully.\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-07-30T09:07:26+02:00",
+          "tree_id": "0ac0404856c449c4e7afc1b237c04955f39f9582",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/f4c776f43bb6eff7f5ac51855a47121231a02e80"
+        },
+        "date": 1753859343521,
         "tool": "customSmallerIsBetter",
         "benches": [
           {

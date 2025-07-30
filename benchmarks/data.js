@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753860266367,
+  "lastUpdate": 1753861795716,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -728,6 +728,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.2999,
             "extra": "14679 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "0e26a46af96cbe287099682545da77b9f9fb43a7",
+          "message": "feat: add test execution to npm publish workflow\n\n- Run all tests before publishing to npm\n- Abort publish if any tests fail\n- Ensures only quality-tested code gets published\n- Shows clear success/failure messages\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-07-30T09:47:58+02:00",
+          "tree_id": "fe3c572de9f5154386a3e429f601830814079be6",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/0e26a46af96cbe287099682545da77b9f9fb43a7"
+        },
+        "date": 1753861795335,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.2506,
+            "extra": "53199 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1373,
+            "unit": "ms",
+            "range": 0.9872999999999998,
+            "extra": "319 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.005,
+            "unit": "ms",
+            "range": 0.26080000000000003,
+            "extra": "200999 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0663,
+            "unit": "ms",
+            "range": 0.3349,
+            "extra": "15083 ops/sec"
           }
         ]
       }

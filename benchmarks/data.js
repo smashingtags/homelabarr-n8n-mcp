@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753875983868,
+  "lastUpdate": 1753875985180,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -1128,6 +1128,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.27040000000000003,
             "extra": "14573 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "6699a1d34c8cb93612084659096cc666e612ebdd",
+          "message": "test: implement comprehensive testing improvements from PR #104 review\n\nMajor improvements based on comprehensive test suite review:\n\nTest Fixes:\n- Fix all 78 failing tests across logger, MSW, and validator tests\n- Fix console spy management in logger tests with proper DEBUG env handling\n- Fix MSW test environment restoration in session-management.test.ts\n- Fix workflow validator tests by adding proper node connections\n- Fix mock setup issues in edge case tests\n\nTest Organization:\n- Split large config-validator.test.ts (1,075 lines) into 4 focused files\n- Rename 63+ tests to follow \"should X when Y\" naming convention\n- Add comprehensive edge case test files for all major validators\n- Create tests/README.md with testing guidelines and best practices\n\nNew Features:\n- Add ConfigValidator.validateBatch() method for bulk validation\n- Add edge case coverage for null/undefined, boundaries, invalid data\n- Add CI-aware performance test timeouts\n- Add JSDoc comments to test utilities and factories\n- Add workflow duplicate node name validation tests\n\nResults:\n- All tests passing: 1,356 passed, 19 skipped\n- Test coverage: 85.34% statements, 85.3% branches\n- From 78 failures to 0 failures\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-07-30T13:44:35+02:00",
+          "tree_id": "d9caad4daabdcc6858f2f167df8cbd34b25016cf",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/6699a1d34c8cb93612084659096cc666e612ebdd"
+        },
+        "date": 1753875984669,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0193,
+            "unit": "ms",
+            "range": 0.3656,
+            "extra": "51734 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1392,
+            "unit": "ms",
+            "range": 0.42890000000000006,
+            "extra": "319 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0049,
+            "unit": "ms",
+            "range": 0.2993,
+            "extra": "202612 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.066,
+            "unit": "ms",
+            "range": 0.31679999999999997,
+            "extra": "15158 ops/sec"
           }
         ]
       }

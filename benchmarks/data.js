@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753885735947,
+  "lastUpdate": 1753955435315,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -1584,6 +1584,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.29050000000000004,
             "extra": "14866 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "903a49d3b0d9a82eef2fc48f5e51772654d62271",
+          "message": "fix: add Docker configuration file support (fixes #105)\n\nThis commit adds comprehensive support for JSON configuration files in Docker containers,\naddressing the issue where the Docker image fails to start in server mode and ignores\nconfiguration files.\n\n## Changes\n\n### Docker Configuration Support\n- Added parse-config.js to safely parse JSON configs and export as shell variables\n- Implemented secure shell quoting to prevent command injection\n- Added dangerous environment variable blocking for security\n- Support for all JSON data types with proper edge case handling\n\n### Docker Server Mode Fix\n- Added support for \"n8n-mcp serve\" command in entrypoint\n- Properly transforms serve command to HTTP mode\n- Fixed missing n8n-mcp binary issue in Docker image\n\n### Security Enhancements\n- POSIX-compliant shell quoting without eval\n- Blocked dangerous variables (PATH, LD_PRELOAD, etc.)\n- Sanitized configuration keys to prevent invalid shell variables\n- Protection against shell metacharacters in values\n\n### Testing\n- Added 53 comprehensive tests for Docker configuration\n- Unit tests for parsing, security, and edge cases\n- Integration tests for Docker entrypoint behavior\n- Security-focused tests for injection prevention\n\n### Documentation\n- Updated Docker README with config file mounting examples\n- Enhanced troubleshooting guide with config file issues\n- Added version bump to 2.8.2\n\n### Additional Files\n- Included deployment-engineer and technical-researcher agent files\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-07-31T11:48:31+02:00",
+          "tree_id": "ea2163e91bd0a80e4773945503bd4d17b187cdbf",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/903a49d3b0d9a82eef2fc48f5e51772654d62271"
+        },
+        "date": 1753955434950,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0187,
+            "unit": "ms",
+            "range": 0.2234,
+            "extra": "53420 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1228,
+            "unit": "ms",
+            "range": 0.48850000000000016,
+            "extra": "320 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0049,
+            "unit": "ms",
+            "range": 0.24719999999999998,
+            "extra": "202390 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.066,
+            "unit": "ms",
+            "range": 0.34659999999999996,
+            "extra": "15159 ops/sec"
           }
         ]
       }

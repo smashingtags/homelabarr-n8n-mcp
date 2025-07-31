@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753968579545,
+  "lastUpdate": 1753972656271,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -1972,6 +1972,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3552,
             "extra": "14929 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "13591df47c22e8695cf1f16a6fbddb516d512e22",
+          "message": "fix: add Docker configuration file support (fixes #105)",
+          "timestamp": "2025-07-31T14:19:53Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/106/commits/13591df47c22e8695cf1f16a6fbddb516d512e22"
+        },
+        "date": 1753972655982,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0192,
+            "unit": "ms",
+            "range": 0.27140000000000003,
+            "extra": "52124 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1453,
+            "unit": "ms",
+            "range": 0.4518,
+            "extra": "318 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0047,
+            "unit": "ms",
+            "range": 0.2636,
+            "extra": "214446 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0661,
+            "unit": "ms",
+            "range": 0.28640000000000004,
+            "extra": "15123 ops/sec"
           }
         ]
       }

@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754033817738,
+  "lastUpdate": 1754051119818,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "1d464e29e53a4b229c5a5d95f5dd187a652cc2c3",
-          "message": "test: add Phase 4 database integration tests (partial)\n\n- Add comprehensive test utilities for database testing\n- Implement connection management tests for in-memory and file databases\n- Add transaction tests including nested transactions and savepoints\n- Test database lifecycle, error handling, and performance\n- Include tests for WAL mode, connection pooling, and constraints\n\nPart of Phase 4: Integration Testing",
-          "timestamp": "2025-07-29T09:36:14+02:00",
-          "tree_id": "fe63070c969006990c2490c10a400167c6a5a8fd",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/1d464e29e53a4b229c5a5d95f5dd187a652cc2c3"
-        },
-        "date": 1753774675129,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0135,
-            "unit": "ms",
-            "range": 0.21789999999999998,
-            "extra": "74100 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 2.3265,
-            "unit": "ms",
-            "range": 0.8298999999999999,
-            "extra": "430 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0032,
-            "unit": "ms",
-            "range": 0.26320000000000005,
-            "extra": "309346 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0476,
-            "unit": "ms",
-            "range": 0.30010000000000003,
-            "extra": "20994 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2500,6 +2448,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3616,
             "extra": "15224 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "3fec6813f3ee370f70553a71394eb15d5448c602",
+          "message": "Feature/n8n integration",
+          "timestamp": "2025-08-01T12:10:02Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/112/commits/3fec6813f3ee370f70553a71394eb15d5448c602"
+        },
+        "date": 1754051119553,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0198,
+            "unit": "ms",
+            "range": 0.3069,
+            "extra": "50417 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.148,
+            "unit": "ms",
+            "range": 0.47989999999999977,
+            "extra": "318 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0049,
+            "unit": "ms",
+            "range": 0.2702,
+            "extra": "204410 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.067,
+            "unit": "ms",
+            "range": 0.3291,
+            "extra": "14935 ops/sec"
           }
         ]
       }

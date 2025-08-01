@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754051119818,
+  "lastUpdate": 1754054449448,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "253b51f5c6024fe94bb84a6560e591a6bc25857f",
-          "message": "fix: resolve database integration test issues\n\n- Fix better-sqlite3 import statements to use namespace import\n- Update test schemas to match actual database schema\n- Align NodeRepository tests with actual API implementation\n- Fix FTS5 tests to work with templates instead of nodes\n- Update mock data to match ParsedNode interface\n- Fix column names to match actual schema (node_type, package_name, etc)\n- Add proper ParsedNode creation helper function\n- Remove tests for non-existent foreign key constraints",
-          "timestamp": "2025-07-29T09:47:44+02:00",
-          "tree_id": "a48bedbc4210fb26c98a19da7c4b93360f57fd76",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/253b51f5c6024fe94bb84a6560e591a6bc25857f"
-        },
-        "date": 1753775367107,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0135,
-            "unit": "ms",
-            "range": 0.21789999999999998,
-            "extra": "74100 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 2.3265,
-            "unit": "ms",
-            "range": 0.8298999999999999,
-            "extra": "430 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0032,
-            "unit": "ms",
-            "range": 0.26320000000000005,
-            "extra": "309346 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0476,
-            "unit": "ms",
-            "range": 0.30010000000000003,
-            "extra": "20994 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2496,6 +2444,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3291,
             "extra": "14935 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "ff7fa33e51e917676cae68f8025a980a5443f6a6",
+          "message": "Feature/n8n integration",
+          "timestamp": "2025-08-01T13:07:38Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/112/commits/ff7fa33e51e917676cae68f8025a980a5443f6a6"
+        },
+        "date": 1754054449111,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.3208,
+            "extra": "53219 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1543,
+            "unit": "ms",
+            "range": 1.1707,
+            "extra": "317 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0049,
+            "unit": "ms",
+            "range": 0.3118,
+            "extra": "203287 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0664,
+            "unit": "ms",
+            "range": 0.365,
+            "extra": "15052 ops/sec"
           }
         ]
       }

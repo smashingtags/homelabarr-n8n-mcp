@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754026815422,
+  "lastUpdate": 1754027240131,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
@@ -2216,6 +2216,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.37520000000000003,
             "extra": "14800 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "0976aeb318e3bc1ae4caaf8adcd63a3883141ad2",
+          "message": "Feature/n8n integration",
+          "timestamp": "2025-08-01T05:17:32Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/112/commits/0976aeb318e3bc1ae4caaf8adcd63a3883141ad2"
+        },
+        "date": 1754027239875,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.019,
+            "unit": "ms",
+            "range": 0.4205,
+            "extra": "52696 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1798,
+            "unit": "ms",
+            "range": 0.5530999999999997,
+            "extra": "314 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0048,
+            "unit": "ms",
+            "range": 0.2802,
+            "extra": "209210 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0681,
+            "unit": "ms",
+            "range": 0.49139999999999995,
+            "extra": "14688 ops/sec"
           }
         ]
       }

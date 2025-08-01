@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754085754565,
+  "lastUpdate": 1754086389756,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "115bb6f36ca390a79e629290ab09f99cb4bdf02a",
-          "message": "fix: resolve test hang issues in CI\n\n- Fixed MSW event listener memory leaks\n- Added proper database connection cleanup\n- Fixed MSW server lifecycle management\n- Reduced global test timeout to 30s for faster failure detection\n- Added resource cleanup in all integration tests\n\nThis should resolve the GitHub Actions test hanging issue",
-          "timestamp": "2025-07-29T13:07:51+02:00",
-          "tree_id": "faa826b5f6755b1c035094410ec6f33727fb037d",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/115bb6f36ca390a79e629290ab09f99cb4bdf02a"
-        },
-        "date": 1753787382452,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0135,
-            "unit": "ms",
-            "range": 0.21789999999999998,
-            "extra": "74100 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 2.3265,
-            "unit": "ms",
-            "range": 0.8298999999999999,
-            "extra": "430 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0032,
-            "unit": "ms",
-            "range": 0.26320000000000005,
-            "extra": "309346 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0476,
-            "unit": "ms",
-            "range": 0.30010000000000003,
-            "extra": "20994 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2480,6 +2428,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.30569999999999997,
             "extra": "15282 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7fbab3ec490ba59c0e9dc50e6551cf1c525bef6b",
+          "message": "Merge pull request #112 from czlonkowski/feature/n8n-integration\n\n## [2.9.0] - 2025-08-01\n\n### Added\n- **n8n Integration with MCP Client Tool Support**: Complete n8n integration enabling n8n-mcp to run as MCP server within n8n workflows\n  - Full compatibility with n8n's MCP Client Tool node\n  - Dedicated n8n mode (`N8N_MODE=true`) for optimized operation\n  - Workflow examples and n8n-friendly tool descriptions\n  - Quick deployment script (`deploy/quick-deploy-n8n.sh`) for easy setup\n  - Docker configuration specifically for n8n deployment (`Dockerfile.n8n`, `docker-compose.n8n.yml`)\n  - Test scripts for n8n integration (`test-n8n-integration.sh`, `test-n8n-mode.sh`)\n- **n8n Deployment Documentation**: Comprehensive guide for deploying n8n-MCP with n8n (`docs/N8N_DEPLOYMENT.md`)\n  - Local testing instructions using `/scripts/test-n8n-mode.sh`\n  - Production deployment with Docker Compose\n  - Cloud deployment guide for Hetzner, AWS, and other providers\n  - n8n MCP Client Tool setup and configuration\n  - Troubleshooting section with common issues and solutions\n- **Protocol Version Negotiation**: Intelligent client detection for n8n compatibility\n  - Automatically detects n8n clients and uses protocol version 2024-11-05\n  - Standard MCP clients get the latest version (2025-03-26)\n  - Improves compatibility with n8n's MCP Client Tool node\n  - Comprehensive protocol negotiation test suite\n- **Comprehensive Parameter Validation**: Enhanced validation for all MCP tools\n  - Clear, user-friendly error messages for invalid parameters\n  - Numeric parameter conversion and edge case handling\n  - 52 new parameter validation tests\n  - Consistent error format across all tools\n- **Session Management**: Improved session handling with comprehensive test coverage\n  - Fixed memory leak potential with async cleanup\n  - Better connection close handling\n  - Enhanced session management tests\n- **Dynamic README Version Badge**: Made version badge update automatically from package.json\n  - Added `update-readme-version.js` script\n  - Enhanced `sync-runtime-version.js` to update README badges\n  - Version badge now stays in sync during publish workflow\n\n### Fixed\n- **Docker Build Optimization**: Fixed Dockerfile.n8n using wrong dependencies\n  - Now uses `package.runtime.json` instead of full `package.json`\n  - Reduces build time from 13+ minutes to 1-2 minutes\n  - Fixes ARM64 build failures due to network timeouts\n  - Reduces image size from ~1.5GB to ~280MB\n- **CI Test Failures**: Resolved Docker entrypoint permission issues\n  - Updated tests to accept dynamic UID range (10000-59999)\n  - Enhanced lock file creation with better error recovery\n  - Fixed TypeScript lint errors in test files\n  - Fixed flaky performance tests with deterministic versions\n- **Schema Validation Issues**: Fixed n8n nested output format compatibility\n  - Added validation for n8n's nested output workaround\n  - Fixed schema validation errors with n8n MCP Client Tool\n  - Enhanced error sanitization for production environments\n\n### Changed\n- **Memory Management**: Improved session cleanup to prevent memory leaks\n- **Error Handling**: Enhanced error sanitization for production environments\n- **Docker Security**: Using unpredictable UIDs/GIDs (10000-59999 range) for better security\n- **CI/CD Configuration**: Made codecov patch coverage informational to prevent CI failures on infrastructure code\n- **Test Scripts**: Enhanced with Docker auto-installation and better user experience\n  - Added colored output and progress indicators\n  - Automatic Docker installation for multiple operating systems\n  - n8n API key flow for management tools\n\n### Security\n- **Enhanced Docker Security**: Dynamic UID/GID generation for containers\n- **Error Sanitization**: Improved error messages to prevent information leakage\n- **Permission Handling**: Better permission management for mounted volumes\n- **Input Validation**: Comprehensive parameter validation prevents injection attacks",
+          "timestamp": "2025-08-02T00:11:44+02:00",
+          "tree_id": "a2f2d5456a92b9604b2f3b3e23b21ad299e043d0",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/7fbab3ec490ba59c0e9dc50e6551cf1c525bef6b"
+        },
+        "date": 1754086389396,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0191,
+            "unit": "ms",
+            "range": 0.3953,
+            "extra": "52303 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1595,
+            "unit": "ms",
+            "range": 0.5754000000000001,
+            "extra": "317 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0049,
+            "unit": "ms",
+            "range": 0.2658,
+            "extra": "203787 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0665,
+            "unit": "ms",
+            "range": 0.3488,
+            "extra": "15044 ops/sec"
           }
         ]
       }

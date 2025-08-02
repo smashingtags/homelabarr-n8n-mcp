@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754140849796,
+  "lastUpdate": 1754141175584,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "6699a1d34c8cb93612084659096cc666e612ebdd",
-          "message": "test: implement comprehensive testing improvements from PR #104 review\n\nMajor improvements based on comprehensive test suite review:\n\nTest Fixes:\n- Fix all 78 failing tests across logger, MSW, and validator tests\n- Fix console spy management in logger tests with proper DEBUG env handling\n- Fix MSW test environment restoration in session-management.test.ts\n- Fix workflow validator tests by adding proper node connections\n- Fix mock setup issues in edge case tests\n\nTest Organization:\n- Split large config-validator.test.ts (1,075 lines) into 4 focused files\n- Rename 63+ tests to follow \"should X when Y\" naming convention\n- Add comprehensive edge case test files for all major validators\n- Create tests/README.md with testing guidelines and best practices\n\nNew Features:\n- Add ConfigValidator.validateBatch() method for bulk validation\n- Add edge case coverage for null/undefined, boundaries, invalid data\n- Add CI-aware performance test timeouts\n- Add JSDoc comments to test utilities and factories\n- Add workflow duplicate node name validation tests\n\nResults:\n- All tests passing: 1,356 passed, 19 skipped\n- Test coverage: 85.34% statements, 85.3% branches\n- From 78 failures to 0 failures\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-07-30T13:44:35+02:00",
-          "tree_id": "d9caad4daabdcc6858f2f167df8cbd34b25016cf",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/6699a1d34c8cb93612084659096cc666e612ebdd"
-        },
-        "date": 1753875984669,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0193,
-            "unit": "ms",
-            "range": 0.3656,
-            "extra": "51734 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1392,
-            "unit": "ms",
-            "range": 0.42890000000000006,
-            "extra": "319 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0049,
-            "unit": "ms",
-            "range": 0.2993,
-            "extra": "202612 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.066,
-            "unit": "ms",
-            "range": 0.31679999999999997,
-            "extra": "15158 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2448,6 +2396,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3721,
             "extra": "15064 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9e71c71698520dc729da42ed6d9510277018be80",
+          "message": "Merge pull request #120 from czlonkowski/fix/issue-118-mcp-connection-loss\n\n### Fixed\n- **Memory Leak in SimpleCache**: Fixed critical memory leak causing MCP server connection loss after several hours (fixes #118)\n  - Added proper timer cleanup in `SimpleCache.destroy()` method\n  - Updated MCP server shutdown to clean up cache timers\n  - Enhanced HTTP server error handling with transport error handlers\n  - Fixed event listener cleanup to prevent accumulation\n  - Added comprehensive test coverage for memory leak prevention",
+          "timestamp": "2025-08-02T15:24:53+02:00",
+          "tree_id": "3a251849a9284d47dc62a67986384b27e01014e2",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/9e71c71698520dc729da42ed6d9510277018be80"
+        },
+        "date": 1754141174983,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.019,
+            "unit": "ms",
+            "range": 1.1844,
+            "extra": "52621 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1152,
+            "unit": "ms",
+            "range": 0.5049999999999999,
+            "extra": "321 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0046,
+            "unit": "ms",
+            "range": 0.2639,
+            "extra": "215603 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.066,
+            "unit": "ms",
+            "range": 0.3366,
+            "extra": "15161 ops/sec"
           }
         ]
       }

@@ -1,56 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754141175584,
+  "lastUpdate": 1754162135374,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "id": "e4acb6a1ef55f6d5b7f4ebd31ce16d97134f03b1",
-          "message": "This PR implements a comprehensive testing infrastructure for n8n-MCP, adding 1,182 tests to ensure code quality and reliability.",
-          "timestamp": "2025-07-30T11:45:06Z",
-          "url": "https://github.com/czlonkowski/n8n-mcp/pull/104/commits/e4acb6a1ef55f6d5b7f4ebd31ce16d97134f03b1"
-        },
-        "date": 1753877719787,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.019,
-            "unit": "ms",
-            "range": 0.33249999999999996,
-            "extra": "52526 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1523,
-            "unit": "ms",
-            "range": 0.5766,
-            "extra": "317 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0048,
-            "unit": "ms",
-            "range": 0.2944,
-            "extra": "210423 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0671,
-            "unit": "ms",
-            "range": 0.4111,
-            "extra": "14901 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2448,6 +2400,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3366,
             "extra": "15161 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "8022ee1f65b954eff4e601819ecc38977cdf295d",
+          "message": "feat: add automated release workflow for npm publishing\n\n- Add release.yml GitHub workflow for automated npm releases\n- Add prepare-release.js script for version bumping and changelog\n- Add extract-changelog.js for release notes extraction\n- Add test-release-automation.js for testing the workflow\n- Add documentation for automated releases\n\nThis enables automatic npm publishing when tags are pushed,\nfixing the issue where releases were created but npm packages\nwere not published.\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-08-02T21:14:00+02:00",
+          "tree_id": "417f4aac4a932b9063c9a397364f6fb4ddd6e5f0",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/8022ee1f65b954eff4e601819ecc38977cdf295d"
+        },
+        "date": 1754162135128,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.23369999999999996,
+            "extra": "53256 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1299,
+            "unit": "ms",
+            "range": 0.43489999999999984,
+            "extra": "320 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0047,
+            "unit": "ms",
+            "range": 0.2627,
+            "extra": "212416 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0657,
+            "unit": "ms",
+            "range": 0.3036,
+            "extra": "15222 ops/sec"
           }
         ]
       }

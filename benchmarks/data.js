@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754115844326,
+  "lastUpdate": 1754118672218,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "c5e012f601a1a16d026139f5a802b10359156285",
-          "message": "fix: resolve test hanging issue by separating MSW setup\n\n- Removed MSW from global vitest config setupFiles\n- Created separate vitest.config.integration.ts for integration tests\n- Integration tests now load MSW only when needed via integration-setup.ts\n- Fixed failing template repository test by updating test data\n- Disabled coverage for integration tests to prevent threshold failures\n- Both unit and integration tests now exit cleanly without hanging\n\nThis separation ensures unit tests run quickly without MSW overhead\nwhile integration tests have full MSW support when needed.\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-07-29T14:27:54+02:00",
-          "tree_id": "34eb286155c88581f651c5b41305b7980182f2f9",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/c5e012f601a1a16d026139f5a802b10359156285"
-        },
-        "date": 1753792260422,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0135,
-            "unit": "ms",
-            "range": 0.21789999999999998,
-            "extra": "74100 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 2.3265,
-            "unit": "ms",
-            "range": 0.8298999999999999,
-            "extra": "430 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0032,
-            "unit": "ms",
-            "range": 0.26320000000000005,
-            "extra": "309346 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0476,
-            "unit": "ms",
-            "range": 0.30010000000000003,
-            "extra": "20994 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2476,6 +2424,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3314,
             "extra": "15172 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "066e7fc668963b101a589989906bcdffa83f408d",
+          "message": "fix: prevent 'propertyValues[itemName] is not iterable' error (fixes #90)",
+          "timestamp": "2025-08-02T06:49:02Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/116/commits/066e7fc668963b101a589989906bcdffa83f408d"
+        },
+        "date": 1754118671562,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0194,
+            "unit": "ms",
+            "range": 0.25260000000000005,
+            "extra": "51523 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.2001,
+            "unit": "ms",
+            "range": 1.4576999999999996,
+            "extra": "312 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.005,
+            "unit": "ms",
+            "range": 0.2524,
+            "extra": "198748 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0673,
+            "unit": "ms",
+            "range": 0.4016,
+            "extra": "14857 ops/sec"
           }
         ]
       }

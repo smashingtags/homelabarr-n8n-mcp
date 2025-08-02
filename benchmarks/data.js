@@ -1,56 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754128420482,
+  "lastUpdate": 1754128572936,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "id": "ced38b2f8a49f91e0ba4004ab242f13363c1a6d5",
-          "message": "This PR implements a comprehensive testing infrastructure for n8n-MCP, adding 1,182 tests to ensure code quality and reliability.",
-          "timestamp": "2025-07-30T07:16:02Z",
-          "url": "https://github.com/czlonkowski/n8n-mcp/pull/104/commits/ced38b2f8a49f91e0ba4004ab242f13363c1a6d5"
-        },
-        "date": 1753862386886,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0187,
-            "unit": "ms",
-            "range": 0.27199999999999996,
-            "extra": "53615 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1447,
-            "unit": "ms",
-            "range": 0.5281000000000002,
-            "extra": "318 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0046,
-            "unit": "ms",
-            "range": 0.2594,
-            "extra": "215484 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0661,
-            "unit": "ms",
-            "range": 0.3047,
-            "extra": "15134 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2448,6 +2400,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3385,
             "extra": "14803 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "6856add1770035bf8ae670ab81812120ba5c919c",
+          "message": "fix: Docker build failures and outdated pre-built images",
+          "timestamp": "2025-08-02T09:37:19Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/117/commits/6856add1770035bf8ae670ab81812120ba5c919c"
+        },
+        "date": 1754128572233,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0187,
+            "unit": "ms",
+            "range": 0.3255,
+            "extra": "53337 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1359,
+            "unit": "ms",
+            "range": 0.5553000000000003,
+            "extra": "319 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0046,
+            "unit": "ms",
+            "range": 0.25680000000000003,
+            "extra": "217253 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0656,
+            "unit": "ms",
+            "range": 0.3508,
+            "extra": "15240 ops/sec"
           }
         ]
       }

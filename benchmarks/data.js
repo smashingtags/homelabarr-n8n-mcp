@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754118672218,
+  "lastUpdate": 1754119355063,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "e405346b3edee3008bbb98ca35071e0aaa4d0601",
-          "message": "fix: resolve all TypeScript and lint errors in integration tests\n\n- Fixed InMemoryTransport destructuring (object → array)\n- Updated all callTool calls to new object syntax\n- Changed getServerInfo() to getServerVersion()\n- Added type assertions for response objects\n- Fixed import paths and missing imports\n- Corrected template and performance test type issues\n- All 56 TypeScript errors resolved\n\nBoth 'npm run lint' and 'npm run typecheck' now pass successfully",
-          "timestamp": "2025-07-29T18:09:03+02:00",
-          "tree_id": "e207b291fabdad62387b24e87e658eb13ad78051",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/e405346b3edee3008bbb98ca35071e0aaa4d0601"
-        },
-        "date": 1753805454300,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0135,
-            "unit": "ms",
-            "range": 0.21789999999999998,
-            "extra": "74100 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 2.3265,
-            "unit": "ms",
-            "range": 0.8298999999999999,
-            "extra": "430 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0032,
-            "unit": "ms",
-            "range": 0.26320000000000005,
-            "extra": "309346 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0476,
-            "unit": "ms",
-            "range": 0.30010000000000003,
-            "extra": "20994 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2472,6 +2420,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.4016,
             "extra": "14857 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "a5c60ddde1f239a03ac94ec848ac6a0f968794e5",
+          "message": "fix: prevent 'propertyValues[itemName] is not iterable' error (fixes #90)",
+          "timestamp": "2025-08-02T06:49:02Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/116/commits/a5c60ddde1f239a03ac94ec848ac6a0f968794e5"
+        },
+        "date": 1754119354425,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0205,
+            "unit": "ms",
+            "range": 0.2565,
+            "extra": "48770 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1323,
+            "unit": "ms",
+            "range": 0.44430000000000014,
+            "extra": "319 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0046,
+            "unit": "ms",
+            "range": 0.26380000000000003,
+            "extra": "216789 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0656,
+            "unit": "ms",
+            "range": 0.3096,
+            "extra": "15242 ops/sec"
           }
         ]
       }

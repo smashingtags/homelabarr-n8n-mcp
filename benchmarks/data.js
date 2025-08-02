@@ -1,56 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754140256183,
+  "lastUpdate": 1754140849796,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "id": "6699a1d34c8cb93612084659096cc666e612ebdd",
-          "message": "This PR implements a comprehensive testing infrastructure for n8n-MCP, adding 1,182 tests to ensure code quality and reliability.",
-          "timestamp": "2025-07-30T11:25:02Z",
-          "url": "https://github.com/czlonkowski/n8n-mcp/pull/104/commits/6699a1d34c8cb93612084659096cc666e612ebdd"
-        },
-        "date": 1753875983557,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0203,
-            "unit": "ms",
-            "range": 0.3331,
-            "extra": "49355 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1657,
-            "unit": "ms",
-            "range": 0.6713999999999998,
-            "extra": "316 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0048,
-            "unit": "ms",
-            "range": 0.2597,
-            "extra": "209749 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0686,
-            "unit": "ms",
-            "range": 0.27040000000000003,
-            "extra": "14573 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2448,6 +2400,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.38739999999999997,
             "extra": "15156 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "df4066022f94584c8edd59cb829ecb9a0a848e5d",
+          "message": "fix: memory leak in SimpleCache causing MCP connection loss (fixes #118)",
+          "timestamp": "2025-08-02T12:40:04Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/120/commits/df4066022f94584c8edd59cb829ecb9a0a848e5d"
+        },
+        "date": 1754140849097,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.24619999999999997,
+            "extra": "53084 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1545,
+            "unit": "ms",
+            "range": 0.6778999999999997,
+            "extra": "317 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0052,
+            "unit": "ms",
+            "range": 0.3212,
+            "extra": "192167 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0664,
+            "unit": "ms",
+            "range": 0.3721,
+            "extra": "15064 ops/sec"
           }
         ]
       }

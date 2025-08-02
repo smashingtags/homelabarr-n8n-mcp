@@ -1,56 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754163243408,
+  "lastUpdate": 1754163377404,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "id": "b8dc9a037cdfcc84804fa6821aac10535fce022d",
-          "message": "This PR implements a comprehensive testing infrastructure for n8n-MCP, adding 1,182 tests to ensure code quality and reliability.",
-          "timestamp": "2025-07-30T12:23:17Z",
-          "url": "https://github.com/czlonkowski/n8n-mcp/pull/104/commits/b8dc9a037cdfcc84804fa6821aac10535fce022d"
-        },
-        "date": 1753878630758,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0189,
-            "unit": "ms",
-            "range": 0.23619999999999997,
-            "extra": "52874 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1238,
-            "unit": "ms",
-            "range": 0.44259999999999966,
-            "extra": "320 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0046,
-            "unit": "ms",
-            "range": 0.24970000000000003,
-            "extra": "216674 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0666,
-            "unit": "ms",
-            "range": 0.3276,
-            "extra": "15016 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2452,6 +2404,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3552,
             "extra": "15218 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "1a99e9c6c733841e214ed329cc7513db2fb76e64",
+          "message": "fix: resolve YAML syntax error in release workflow\n\n- Fix GitHub Actions expression in shell script by using env variable\n- Prevents YAML parsing error on line 452\n- Ensures workflow can execute properly\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-08-02T21:34:49+02:00",
+          "tree_id": "fe4b51c5f7d466c2b5cada46a7748778e0990a13",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/1a99e9c6c733841e214ed329cc7513db2fb76e64"
+        },
+        "date": 1754163376980,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0189,
+            "unit": "ms",
+            "range": 0.2714,
+            "extra": "52955 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.2654,
+            "unit": "ms",
+            "range": 1.5471000000000004,
+            "extra": "306 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0048,
+            "unit": "ms",
+            "range": 0.2882,
+            "extra": "208321 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0661,
+            "unit": "ms",
+            "range": 0.3105,
+            "extra": "15133 ops/sec"
           }
         ]
       }

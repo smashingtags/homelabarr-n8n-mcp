@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754162135374,
+  "lastUpdate": 1754163243408,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "e4acb6a1ef55f6d5b7f4ebd31ce16d97134f03b1",
-          "message": "fix: resolve TypeScript compilation errors in test files\n\n- Add explicit type annotations for properties arrays in config validator tests\n- Update ValidationResult mock to include required visibleProperties and hiddenProperties\n- Fix all TypeScript compilation errors found in CI/CD pipeline\n\nAll tests passing with 85.36% coverage.\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-07-30T14:13:19+02:00",
-          "tree_id": "3a0c08cf73ae50fb8f7abdbbaba7af2d54b09477",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/e4acb6a1ef55f6d5b7f4ebd31ce16d97134f03b1"
-        },
-        "date": 1753877733764,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.019,
-            "unit": "ms",
-            "range": 0.27680000000000005,
-            "extra": "52514 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1378,
-            "unit": "ms",
-            "range": 0.5802,
-            "extra": "319 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0047,
-            "unit": "ms",
-            "range": 0.2914,
-            "extra": "214877 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.066,
-            "unit": "ms",
-            "range": 0.2854,
-            "extra": "15152 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2452,6 +2400,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3036,
             "extra": "15222 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "7dc938065f3223091c823befbf7fb563c427424c",
+          "message": "fix: resolve YAML syntax error in release workflow\n\n- Fix multiline commit message syntax that was breaking YAML parsing\n- Add missing GITHUB_TOKEN environment variable for gh CLI commands\n- Simplify commit message to avoid YAML parsing issues\n\nThe workflow was failing due to unescaped multiline string in git commit command.\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-08-02T21:32:27+02:00",
+          "tree_id": "cfd9e6f0c17ec4e7f502ca0db9774d635dfe5ec5",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/7dc938065f3223091c823befbf7fb563c427424c"
+        },
+        "date": 1754163242780,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.24680000000000002,
+            "extra": "53251 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1272,
+            "unit": "ms",
+            "range": 1.9423000000000004,
+            "extra": "320 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0046,
+            "unit": "ms",
+            "range": 0.27390000000000003,
+            "extra": "216204 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0657,
+            "unit": "ms",
+            "range": 0.3552,
+            "extra": "15218 ops/sec"
           }
         ]
       }

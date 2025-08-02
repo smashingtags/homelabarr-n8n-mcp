@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754123352820,
+  "lastUpdate": 1754124783963,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "07cda6e3abbd3161a01ef67198381b6766d2ff83",
-          "message": "chore: clean up development artifacts and update .gitignore\n\n- Remove AI agent coordination files and progress tracking\n- Remove temporary test results and generated artifacts\n- Remove diagnostic test scripts from src/scripts/\n- Remove development planning documents\n- Update .gitignore to exclude test artifacts\n- Clean up 53 temporary files total",
-          "timestamp": "2025-07-30T09:22:53+02:00",
-          "tree_id": "1553cc5ca363d04a2322e0c72d34f78dde595a93",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/07cda6e3abbd3161a01ef67198381b6766d2ff83"
-        },
-        "date": 1753860266074,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0193,
-            "unit": "ms",
-            "range": 0.30569999999999997,
-            "extra": "51919 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.2044,
-            "unit": "ms",
-            "range": 1.7138999999999998,
-            "extra": "312 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0047,
-            "unit": "ms",
-            "range": 0.2854,
-            "extra": "212905 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0681,
-            "unit": "ms",
-            "range": 0.2999,
-            "extra": "14679 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2456,6 +2404,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3566,
             "extra": "14183 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f6906d7971c40adc5a30aada4a2c9aba99264ec3",
+          "message": "Merge pull request #116 from czlonkowski/fix/issue-90-fixed-collection-validation\n\nfix: prevent 'propertyValues[itemName] is not iterable' error (fixes #90)",
+          "timestamp": "2025-08-02T10:51:38+02:00",
+          "tree_id": "9401ece475b1fbfce378f396494799984d608f30",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/f6906d7971c40adc5a30aada4a2c9aba99264ec3"
+        },
+        "date": 1754124783270,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0193,
+            "unit": "ms",
+            "range": 0.30589999999999995,
+            "extra": "51868 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1516,
+            "unit": "ms",
+            "range": 0.4737,
+            "extra": "317 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0049,
+            "unit": "ms",
+            "range": 0.3856,
+            "extra": "205391 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0659,
+            "unit": "ms",
+            "range": 0.3015,
+            "extra": "15173 ops/sec"
           }
         ]
       }

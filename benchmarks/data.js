@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754120210894,
+  "lastUpdate": 1754122661301,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "7438ec950db1e7d1aa287ff8464a58be03169e1c",
-          "message": "fix: resolve TypeScript lint errors in integration tests\n\n- Fixed all 39 TypeScript errors about 'response.content' being of type 'unknown'\n- Changed type assertions from 'response.content[0] as any' to '(response as any).content[0]'\n- All tests pass and lint check is now clean\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-07-29T21:13:12+02:00",
-          "tree_id": "ce959f5c1ee9e337657d6a35df0055875a00dfe7",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/7438ec950db1e7d1aa287ff8464a58be03169e1c"
-        },
-        "date": 1753816489866,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0135,
-            "unit": "ms",
-            "range": 0.21789999999999998,
-            "extra": "74100 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 2.3265,
-            "unit": "ms",
-            "range": 0.8298999999999999,
-            "extra": "430 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0032,
-            "unit": "ms",
-            "range": 0.26320000000000005,
-            "extra": "309346 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0476,
-            "unit": "ms",
-            "range": 0.30010000000000003,
-            "extra": "20994 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2464,6 +2412,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.398,
             "extra": "14310 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "a2be2b36d569e8e5684ba911f4f6a116351ad94c",
+          "message": "fix: prevent 'propertyValues[itemName] is not iterable' error (fixes #90)",
+          "timestamp": "2025-08-02T08:01:05Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/116/commits/a2be2b36d569e8e5684ba911f4f6a116351ad94c"
+        },
+        "date": 1754122660631,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0187,
+            "unit": "ms",
+            "range": 0.2738,
+            "extra": "53364 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1308,
+            "unit": "ms",
+            "range": 0.5044,
+            "extra": "319 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0047,
+            "unit": "ms",
+            "range": 0.24380000000000002,
+            "extra": "214353 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0663,
+            "unit": "ms",
+            "range": 0.2764,
+            "extra": "15083 ops/sec"
           }
         ]
       }

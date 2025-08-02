@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754163841892,
+  "lastUpdate": 1754166352685,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "c36567875a6ca2499a4660332a93d390bdb465b7",
-          "message": "chore: bump version to 2.8.0\n\n- Update package.json version from 2.7.23 to 2.8.0\n- Update README.md test count from 1,182 to 1,356 tests\n- Add comprehensive CHANGELOG entry for v2.8.0\n- Document all test improvements and fixes from PR #104\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-07-30T15:43:48+02:00",
-          "tree_id": "6b8507d1827d1865dc69e2e74945ce432f367de5",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/c36567875a6ca2499a4660332a93d390bdb465b7"
-        },
-        "date": 1753883125428,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0189,
-            "unit": "ms",
-            "range": 0.2807,
-            "extra": "52881 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.2642,
-            "unit": "ms",
-            "range": 3.1914999999999996,
-            "extra": "306 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0049,
-            "unit": "ms",
-            "range": 0.2457,
-            "extra": "202642 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0672,
-            "unit": "ms",
-            "range": 0.3097,
-            "extra": "14887 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2456,6 +2404,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.4093,
             "extra": "14961 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "08f3d8120dd59e8b7bc4b04887e7c11dd61a6d33",
+          "message": "fix: skip CI/CD workflows for documentation-only changes",
+          "timestamp": "2025-08-02T19:56:55Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/121/commits/08f3d8120dd59e8b7bc4b04887e7c11dd61a6d33"
+        },
+        "date": 1754166352414,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0187,
+            "unit": "ms",
+            "range": 0.24699999999999997,
+            "extra": "53542 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1245,
+            "unit": "ms",
+            "range": 0.44079999999999986,
+            "extra": "320 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0046,
+            "unit": "ms",
+            "range": 0.24330000000000002,
+            "extra": "216295 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.066,
+            "unit": "ms",
+            "range": 0.2671,
+            "extra": "15158 ops/sec"
           }
         ]
       }

@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754122661301,
+  "lastUpdate": 1754123352820,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "f4c776f43bb6eff7f5ac51855a47121231a02e80",
-          "message": "fix: resolve all TypeScript lint errors\n\n- Fixed undefined variable reference in server.ts (possiblePaths)\n- Fixed type mismatches in database performance tests\n- Added proper type assertions for MCP response objects\n- Fixed TemplateNode interface compliance in tests\n\nAll TypeScript checks now pass successfully.\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-07-30T09:07:26+02:00",
-          "tree_id": "0ac0404856c449c4e7afc1b237c04955f39f9582",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/f4c776f43bb6eff7f5ac51855a47121231a02e80"
-        },
-        "date": 1753859343521,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0135,
-            "unit": "ms",
-            "range": 0.21789999999999998,
-            "extra": "74100 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 2.3265,
-            "unit": "ms",
-            "range": 0.8298999999999999,
-            "extra": "430 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0032,
-            "unit": "ms",
-            "range": 0.26320000000000005,
-            "extra": "309346 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0476,
-            "unit": "ms",
-            "range": 0.30010000000000003,
-            "extra": "20994 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2460,6 +2408,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.2764,
             "extra": "15083 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "296bf76e682ed8adf7489e08ef3e11a66555bdf6",
+          "message": "fix: prevent 'propertyValues[itemName] is not iterable' error (fixes #90)",
+          "timestamp": "2025-08-02T08:01:05Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/116/commits/296bf76e682ed8adf7489e08ef3e11a66555bdf6"
+        },
+        "date": 1754123352576,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0189,
+            "unit": "ms",
+            "range": 0.24069999999999997,
+            "extra": "53007 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1221,
+            "unit": "ms",
+            "range": 0.4663999999999997,
+            "extra": "320 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0049,
+            "unit": "ms",
+            "range": 0.2384,
+            "extra": "205308 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0705,
+            "unit": "ms",
+            "range": 0.3566,
+            "extra": "14183 ops/sec"
           }
         ]
       }

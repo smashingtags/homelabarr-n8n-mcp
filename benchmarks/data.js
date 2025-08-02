@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754163377404,
+  "lastUpdate": 1754163841892,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "b8dc9a037cdfcc84804fa6821aac10535fce022d",
-          "message": "fix: add missing permissions to GitHub Actions workflows\n\n- Add issues, pull-requests, and checks write permissions to test.yml\n- Add statuses write permission to benchmark-pr.yml\n- Fixes \"Resource not accessible by integration\" errors in CI/CD\n\nThese permissions allow workflows to create PR comments and commit statuses.\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-07-30T14:28:36+02:00",
-          "tree_id": "954441a7b44613fd580df1ab601fe7544515901b",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/b8dc9a037cdfcc84804fa6821aac10535fce022d"
-        },
-        "date": 1753878638855,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0191,
-            "unit": "ms",
-            "range": 0.3716,
-            "extra": "52265 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1408,
-            "unit": "ms",
-            "range": 0.5615999999999999,
-            "extra": "318 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0048,
-            "unit": "ms",
-            "range": 0.2795,
-            "extra": "209107 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0679,
-            "unit": "ms",
-            "range": 0.3333,
-            "extra": "14721 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2456,6 +2404,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3105,
             "extra": "15133 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "e94bb5479cbe9feb4561d61e43d8671203a5e8d3",
+          "message": "Fix deploy on Railway button",
+          "timestamp": "2025-08-02T21:42:00+02:00",
+          "tree_id": "2606d14c8b2229f2befd8735896d22b857c4571f",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/e94bb5479cbe9feb4561d61e43d8671203a5e8d3"
+        },
+        "date": 1754163841523,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.35469999999999996,
+            "extra": "53293 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1667,
+            "unit": "ms",
+            "range": 0.7376,
+            "extra": "316 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0048,
+            "unit": "ms",
+            "range": 0.27290000000000003,
+            "extra": "206624 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0668,
+            "unit": "ms",
+            "range": 0.4093,
+            "extra": "14961 ops/sec"
           }
         ]
       }

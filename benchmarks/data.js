@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754128572936,
+  "lastUpdate": 1754128962493,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "ee9efd7849e9ef20d1da5c73138389bbd67a5b3b",
-          "message": "fix: resolve Docker build failures by copying tsconfig.build.json\n\n- Updated Dockerfile to copy all tsconfig*.json files (includes tsconfig.build.json)\n- Updated Dockerfile.railway with same fix\n- Changed standard Dockerfile to use 'tsc -p tsconfig.build.json' for consistency\n- This fixes the missing file errors preventing Docker builds in CI\n\nThe issue was that tsconfig.build.json was added for the testing infrastructure\nbut the Docker COPY commands were not updated to include it.\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-07-30T10:13:14+02:00",
-          "tree_id": "fd4b182dbb433551daf009419c65a4928d829546",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/ee9efd7849e9ef20d1da5c73138389bbd67a5b3b"
-        },
-        "date": 1753863300360,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0188,
-            "unit": "ms",
-            "range": 0.3651,
-            "extra": "53068 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1402,
-            "unit": "ms",
-            "range": 0.7529000000000003,
-            "extra": "318 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0051,
-            "unit": "ms",
-            "range": 0.5585,
-            "extra": "196612 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0674,
-            "unit": "ms",
-            "range": 0.37129999999999996,
-            "extra": "14845 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2448,6 +2396,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3508,
             "extra": "15240 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6de82cd2b986442ad8d47f1b422ce157deda85eb",
+          "message": "Merge pull request #117 from czlonkowski/bugfix/general-fixes\n\nfix: Docker build failures and outdated pre-built images",
+          "timestamp": "2025-08-02T12:01:16+02:00",
+          "tree_id": "b92536fb56fc4717bc29572e14a230096471772c",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/6de82cd2b986442ad8d47f1b422ce157deda85eb"
+        },
+        "date": 1754128961879,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.019,
+            "unit": "ms",
+            "range": 0.3613,
+            "extra": "52738 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1999,
+            "unit": "ms",
+            "range": 0.7241,
+            "extra": "313 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0047,
+            "unit": "ms",
+            "range": 0.2632,
+            "extra": "213234 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0667,
+            "unit": "ms",
+            "range": 0.3528,
+            "extra": "15002 ops/sec"
           }
         ]
       }

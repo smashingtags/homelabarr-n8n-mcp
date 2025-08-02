@@ -1,56 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754166352685,
+  "lastUpdate": 1754168356167,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "id": "c36567875a6ca2499a4660332a93d390bdb465b7",
-          "message": "This PR implements a comprehensive testing infrastructure for n8n-MCP, adding 1,182 tests to ensure code quality and reliability.",
-          "timestamp": "2025-07-30T13:37:13Z",
-          "url": "https://github.com/czlonkowski/n8n-mcp/pull/104/commits/c36567875a6ca2499a4660332a93d390bdb465b7"
-        },
-        "date": 1753883147464,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0187,
-            "unit": "ms",
-            "range": 0.2371,
-            "extra": "53608 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1286,
-            "unit": "ms",
-            "range": 1.0852,
-            "extra": "320 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0047,
-            "unit": "ms",
-            "range": 0.2686,
-            "extra": "211177 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0656,
-            "unit": "ms",
-            "range": 0.2725,
-            "extra": "15239 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2452,6 +2404,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.2671,
             "extra": "15158 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "035c4a349e848baa04b36f4bffdd47f7cad0325d",
+          "message": "Merge pull request #121 from czlonkowski/fix/ci-skip-docs-only-changes\n\nfix: skip CI/CD workflows for documentation-only changes",
+          "timestamp": "2025-08-02T22:57:58+02:00",
+          "tree_id": "66a1b5b36de41b0594fb6e444df54baadb54bd06",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/035c4a349e848baa04b36f4bffdd47f7cad0325d"
+        },
+        "date": 1754168355467,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.2869,
+            "extra": "53217 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1259,
+            "unit": "ms",
+            "range": 0.6545999999999998,
+            "extra": "320 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.005,
+            "unit": "ms",
+            "range": 0.3068,
+            "extra": "199967 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0656,
+            "unit": "ms",
+            "range": 0.301,
+            "extra": "15240 ops/sec"
           }
         ]
       }

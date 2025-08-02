@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754119355063,
+  "lastUpdate": 1754120210894,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "6a231375d53c6fc83fcbbb7b78e778a5bd3338b7",
-          "message": "fix: resolve MCP protocol integration test failures\n\n- Fixed response structure mismatch in 67 failing tests\n- Updated tests to use response.content[0] instead of response[0]\n- Tests now correctly handle MCP SDK's content array structure\n- All 30 MCP protocol integration tests now pass\n\nTech debt: Need to add proper TypeScript types for MCP responses\nto replace current 'as any' assertions (tracked separately)\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-07-29T20:34:09+02:00",
-          "tree_id": "d63178595fd825d1a63f560f7986692f4944013a",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/6a231375d53c6fc83fcbbb7b78e778a5bd3338b7"
-        },
-        "date": 1753814163928,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0135,
-            "unit": "ms",
-            "range": 0.21789999999999998,
-            "extra": "74100 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 2.3265,
-            "unit": "ms",
-            "range": 0.8298999999999999,
-            "extra": "430 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0032,
-            "unit": "ms",
-            "range": 0.26320000000000005,
-            "extra": "309346 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0476,
-            "unit": "ms",
-            "range": 0.30010000000000003,
-            "extra": "20994 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2468,6 +2416,54 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3096,
             "extra": "15242 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "id": "35b4e77bcd0141cd1f49130f2b9f9f9b083a8b02",
+          "message": "fix: prevent 'propertyValues[itemName] is not iterable' error (fixes #90)",
+          "timestamp": "2025-08-02T07:33:44Z",
+          "url": "https://github.com/czlonkowski/n8n-mcp/pull/116/commits/35b4e77bcd0141cd1f49130f2b9f9f9b083a8b02"
+        },
+        "date": 1754120210628,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0195,
+            "unit": "ms",
+            "range": 0.2333,
+            "extra": "51284 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.2692,
+            "unit": "ms",
+            "range": 0.6299000000000001,
+            "extra": "306 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0051,
+            "unit": "ms",
+            "range": 0.2654,
+            "extra": "196522 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0699,
+            "unit": "ms",
+            "range": 0.398,
+            "extra": "14310 ops/sec"
           }
         ]
       }

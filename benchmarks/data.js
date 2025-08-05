@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754168356167,
+  "lastUpdate": 1754374297248,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "Romuald Członkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "4847fae1a1268a3a1b865b5d5bdc1e4801e8c9e3",
-          "message": "Merge pull request #104 from czlonkowski/feat/comprehensive-testing-suite\n\nThis PR implements a comprehensive testing infrastructure for n8n-MCP",
-          "timestamp": "2025-07-30T15:47:33+02:00",
-          "tree_id": "6b8507d1827d1865dc69e2e74945ce432f367de5",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/4847fae1a1268a3a1b865b5d5bdc1e4801e8c9e3"
-        },
-        "date": 1753883359395,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0188,
-            "unit": "ms",
-            "range": 0.2345,
-            "extra": "53123 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1176,
-            "unit": "ms",
-            "range": 0.4623000000000004,
-            "extra": "321 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0046,
-            "unit": "ms",
-            "range": 0.24130000000000001,
-            "extra": "216883 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0653,
-            "unit": "ms",
-            "range": 0.3465,
-            "extra": "15318 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2456,6 +2404,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.301,
             "extra": "15240 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "6d95786938afe2cc278264ae708573848bcfa6f0",
+          "message": "2.10.2",
+          "timestamp": "2025-08-05T08:09:22+02:00",
+          "tree_id": "d37cac8a2aabf90ebf74d01af6da355d21e0e363",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/6d95786938afe2cc278264ae708573848bcfa6f0"
+        },
+        "date": 1754374296601,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.019,
+            "unit": "ms",
+            "range": 0.2854,
+            "extra": "52759 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.163,
+            "unit": "ms",
+            "range": 0.5223,
+            "extra": "316 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0047,
+            "unit": "ms",
+            "range": 0.25070000000000003,
+            "extra": "211067 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0708,
+            "unit": "ms",
+            "range": 0.3591,
+            "extra": "14129 ops/sec"
           }
         ]
       }

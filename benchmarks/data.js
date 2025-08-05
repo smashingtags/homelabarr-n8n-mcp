@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754374297248,
+  "lastUpdate": 1754375777063,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "dce2d9d83bdd53633886148dd992cec4aac3010b",
-          "message": "chore: update n8n to ^1.104.1 and bump version to 2.8.1\n\n- Updated n8n to ^1.104.1\n- Updated n8n-core to ^1.103.1\n- Updated n8n-workflow to ^1.101.0\n- Updated @n8n/n8n-nodes-langchain to ^1.103.1\n- Rebuilt node database with 532 nodes\n- Sanitized 499 workflow templates\n- All 1,182 tests passing (933 unit, 249 integration)\n- All validation tests passing\n- Built and prepared for npm publish\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-07-30T16:20:51+02:00",
-          "tree_id": "9553220afce5b02079ab24a2a0bb1fed4d9d4145",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/dce2d9d83bdd53633886148dd992cec4aac3010b"
-        },
-        "date": 1753885735665,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0187,
-            "unit": "ms",
-            "range": 0.2555,
-            "extra": "53387 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1425,
-            "unit": "ms",
-            "range": 0.4264999999999999,
-            "extra": "318 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0047,
-            "unit": "ms",
-            "range": 0.2508,
-            "extra": "211982 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0673,
-            "unit": "ms",
-            "range": 0.29050000000000004,
-            "extra": "14866 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2456,6 +2404,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3591,
             "extra": "14129 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "ba3d1b35f2c2f8940c9903686260a16d0fb418d4",
+          "message": "fix: remove conflicting paths-ignore from release workflow\n\n- GitHub Actions doesn't support both 'paths' and 'paths-ignore' in the same trigger\n- This was causing the release workflow to fail on startup\n- Keeping only the 'paths' filter for package.json changes\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-08-05T08:34:35+02:00",
+          "tree_id": "2e474d55b23e880e33ce0e59e41d8f7dc80698d9",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/ba3d1b35f2c2f8940c9903686260a16d0fb418d4"
+        },
+        "date": 1754375776779,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0191,
+            "unit": "ms",
+            "range": 0.2687,
+            "extra": "52277 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1747,
+            "unit": "ms",
+            "range": 0.7626,
+            "extra": "315 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0048,
+            "unit": "ms",
+            "range": 0.2757,
+            "extra": "207606 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0677,
+            "unit": "ms",
+            "range": 0.49219999999999997,
+            "extra": "14771 ops/sec"
           }
         ]
       }

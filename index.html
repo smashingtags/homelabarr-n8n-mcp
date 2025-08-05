@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>n8n-mcp Benchmarks</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .chart-container {
+            background-color: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+        .error {
+            background-color: #fee;
+            color: #c00;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>n8n-mcp Performance Benchmarks</h1>
+        <p class="subtitle">Tracking performance metrics across commits</p>
+        
+        <div id="charts" class="charts-grid">
+            <div class="loading">Loading benchmark data...</div>
+        </div>
+    </div>
+
+    <script>
+        // Load benchmark data
+        fetch('benchmarks/data.js')
+            .then(response => response.text())
+            .then(text => {
+                // Extract the data from the JS file
+                const match = text.match(/window\.BENCHMARK_DATA\s*=\s*({[\s\S]*})/);
+                if (match) {
+                    const data = eval('(' + match[1] + ')');
+                    renderCharts(data);
+                } else {
+                    showError('Could not parse benchmark data');
+                }
+            })
+            .catch(error => {
+                showError('Failed to load benchmark data: ' + error.message);
+            });
+
+        function showError(message) {
+            document.getElementById('charts').innerHTML = 
+                '<div class="error">' + message + '</div>';
+        }
+
+        function renderCharts(data) {
+            const chartsContainer = document.getElementById('charts');
+            chartsContainer.innerHTML = '';
+
+            // Group benchmarks by category
+            const categories = {};
+            
+            Object.entries(data.entries).forEach(([name, entries]) => {
+                const category = name.split(' - ')[0];
+                if (!categories[category]) {
+                    categories[category] = [];
+                }
+                categories[category].push({ name, entries });
+            });
+
+            // Create a chart for each category
+            Object.entries(categories).forEach(([category, benchmarks]) => {
+                const chartContainer = document.createElement('div');
+                chartContainer.className = 'chart-container';
+                
+                const title = document.createElement('div');
+                title.className = 'chart-title';
+                title.textContent = category;
+                chartContainer.appendChild(title);
+
+                const canvas = document.createElement('canvas');
+                chartContainer.appendChild(canvas);
+                chartsContainer.appendChild(chartContainer);
+
+                // Prepare data for the chart
+                const datasets = benchmarks.map((benchmark, index) => {
+                    const colors = [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(153, 102, 255)',
+                        'rgb(255, 159, 64)'
+                    ];
+                    
+                    return {
+                        label: benchmark.name.split(' - ').slice(1).join(' - '),
+                        data: benchmark.entries.map(entry => ({
+                            x: new Date(entry.date),
+                            y: entry.value
+                        })),
+                        borderColor: colors[index % colors.length],
+                        backgroundColor: colors[index % colors.length] + '20',
+                        tension: 0.1
+                    };
+                });
+
+                // Create the chart
+                new Chart(canvas, {
+                    type: 'line',
+                    data: { datasets },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + 
+                                               context.parsed.y.toFixed(2) + ' ms';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                    displayFormats: {
+                                        hour: 'MMM d, HH:mm'
+                                    }
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Date'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Time (ms)'
+                                },
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                // Set height after creation
+                canvas.style.height = '300px';
+            });
+        }
+    </script>
+</body>
+</html>

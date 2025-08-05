@@ -1,60 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754375777063,
+  "lastUpdate": 1754376749762,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "email": "56956555+czlonkowski@users.noreply.github.com",
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "distinct": true,
-          "id": "903a49d3b0d9a82eef2fc48f5e51772654d62271",
-          "message": "fix: add Docker configuration file support (fixes #105)\n\nThis commit adds comprehensive support for JSON configuration files in Docker containers,\naddressing the issue where the Docker image fails to start in server mode and ignores\nconfiguration files.\n\n## Changes\n\n### Docker Configuration Support\n- Added parse-config.js to safely parse JSON configs and export as shell variables\n- Implemented secure shell quoting to prevent command injection\n- Added dangerous environment variable blocking for security\n- Support for all JSON data types with proper edge case handling\n\n### Docker Server Mode Fix\n- Added support for \"n8n-mcp serve\" command in entrypoint\n- Properly transforms serve command to HTTP mode\n- Fixed missing n8n-mcp binary issue in Docker image\n\n### Security Enhancements\n- POSIX-compliant shell quoting without eval\n- Blocked dangerous variables (PATH, LD_PRELOAD, etc.)\n- Sanitized configuration keys to prevent invalid shell variables\n- Protection against shell metacharacters in values\n\n### Testing\n- Added 53 comprehensive tests for Docker configuration\n- Unit tests for parsing, security, and edge cases\n- Integration tests for Docker entrypoint behavior\n- Security-focused tests for injection prevention\n\n### Documentation\n- Updated Docker README with config file mounting examples\n- Enhanced troubleshooting guide with config file issues\n- Added version bump to 2.8.2\n\n### Additional Files\n- Included deployment-engineer and technical-researcher agent files\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-          "timestamp": "2025-07-31T11:48:31+02:00",
-          "tree_id": "ea2163e91bd0a80e4773945503bd4d17b187cdbf",
-          "url": "https://github.com/czlonkowski/n8n-mcp/commit/903a49d3b0d9a82eef2fc48f5e51772654d62271"
-        },
-        "date": 1753955434950,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0187,
-            "unit": "ms",
-            "range": 0.2234,
-            "extra": "53420 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1228,
-            "unit": "ms",
-            "range": 0.48850000000000016,
-            "extra": "320 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0049,
-            "unit": "ms",
-            "range": 0.24719999999999998,
-            "extra": "202390 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.066,
-            "unit": "ms",
-            "range": 0.34659999999999996,
-            "extra": "15159 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2456,6 +2404,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.49219999999999997,
             "extra": "14771 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "b944afa1bbce3c09e00004cff7ee660f61423057",
+          "message": "fix: add Jekyll config to prevent Liquid syntax errors in GitHub Pages\n\n- Jekyll was trying to parse Liquid template syntax in our code examples\n- This caused the Pages build to fail with syntax errors\n- Added _config.yml to exclude all documentation and source files\n- GitHub Pages will now only process benchmark-related files\n- Fixes the pages-build-deployment workflow failure\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-08-05T08:50:52+02:00",
+          "tree_id": "5408835cd584bd20fddedaf46fa98b519ad19eab",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/b944afa1bbce3c09e00004cff7ee660f61423057"
+        },
+        "date": 1754376749511,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.3312,
+            "extra": "53252 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1486,
+            "unit": "ms",
+            "range": 0.48980000000000024,
+            "extra": "318 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0049,
+            "unit": "ms",
+            "range": 0.264,
+            "extra": "203200 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0664,
+            "unit": "ms",
+            "range": 0.3625,
+            "extra": "15056 ops/sec"
           }
         ]
       }

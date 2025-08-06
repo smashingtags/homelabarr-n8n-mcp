@@ -1,56 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754376749762,
+  "lastUpdate": 1754508360439,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "id": "71cd20bf95539857d7c7518abe7a3c72b261e62d",
-          "message": "fix: add Docker configuration file support (fixes #105)",
-          "timestamp": "2025-07-31T10:57:30Z",
-          "url": "https://github.com/czlonkowski/n8n-mcp/pull/106/commits/71cd20bf95539857d7c7518abe7a3c72b261e62d"
-        },
-        "date": 1753960015635,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0189,
-            "unit": "ms",
-            "range": 0.213,
-            "extra": "52796 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.145,
-            "unit": "ms",
-            "range": 0.5198,
-            "extra": "318 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0046,
-            "unit": "ms",
-            "range": 0.2496,
-            "extra": "218154 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0649,
-            "unit": "ms",
-            "range": 0.3113,
-            "extra": "15401 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2456,6 +2408,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3625,
             "extra": "15056 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "czlonkowski",
+            "username": "czlonkowski"
+          },
+          "distinct": true,
+          "id": "72d90a258417f97e27bee8f0360043e74394c064",
+          "message": "docs: update n8n deployment guide and remove outdated test scripts\n\n- Update N8N_DEPLOYMENT.md to recommend test-n8n-integration.sh\n- Remove outdated test-n8n-mode.sh and related files\n- The integration test script properly tests full n8n integration with correct protocol version (2024-11-05)\n- Removed scripts: test-n8n-mode.sh, test-n8n-mode.ts, debug-n8n-mode.js\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+          "timestamp": "2025-08-06T21:24:10+02:00",
+          "tree_id": "026bf3a4da37981a492db0afea8f927e728a6cfd",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/72d90a258417f97e27bee8f0360043e74394c064"
+        },
+        "date": 1754508360045,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0189,
+            "unit": "ms",
+            "range": 0.4118,
+            "extra": "52849 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.2207,
+            "unit": "ms",
+            "range": 1.3466999999999998,
+            "extra": "310 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0048,
+            "unit": "ms",
+            "range": 0.2779,
+            "extra": "208683 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0695,
+            "unit": "ms",
+            "range": 0.5238,
+            "extra": "14382 ops/sec"
           }
         ]
       }

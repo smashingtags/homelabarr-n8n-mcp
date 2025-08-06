@@ -1,56 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754511940820,
+  "lastUpdate": 1754512866557,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "id": "8047297abc8dceea0a63230eda3b3e8e3930f1bb",
-          "message": "fix: add Docker configuration file support (fixes #105)",
-          "timestamp": "2025-07-31T11:44:03Z",
-          "url": "https://github.com/czlonkowski/n8n-mcp/pull/106/commits/8047297abc8dceea0a63230eda3b3e8e3930f1bb"
-        },
-        "date": 1753962406980,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0188,
-            "unit": "ms",
-            "range": 0.25360000000000005,
-            "extra": "53058 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1335,
-            "unit": "ms",
-            "range": 0.4918999999999998,
-            "extra": "319 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0046,
-            "unit": "ms",
-            "range": 0.2614,
-            "extra": "216793 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0655,
-            "unit": "ms",
-            "range": 0.3141,
-            "extra": "15274 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2464,6 +2416,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.29290000000000005,
             "extra": "15164 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9e322ad590f44ff0f5623d35896781ed1b9f852d",
+          "message": "Merge pull request #127 from czlonkowski/test/ci-permission-fixes\n\nfix: handle GitHub Actions permission errors gracefully",
+          "timestamp": "2025-08-06T22:39:36+02:00",
+          "tree_id": "04291aebeb6390696be2181e090475f790aa9551",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/9e322ad590f44ff0f5623d35896781ed1b9f852d"
+        },
+        "date": 1754512866274,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.2398,
+            "extra": "53113 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1334,
+            "unit": "ms",
+            "range": 0.47319999999999984,
+            "extra": "319 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0047,
+            "unit": "ms",
+            "range": 0.2657,
+            "extra": "214173 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.167,
+            "unit": "ms",
+            "range": 5.9507,
+            "extra": "5990 ops/sec"
           }
         ]
       }

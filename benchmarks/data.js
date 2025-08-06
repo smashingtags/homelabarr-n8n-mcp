@@ -1,56 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754508360439,
+  "lastUpdate": 1754511940820,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "id": "55deb69bafd5b51b7f0101b4c66757afd1d11c6e",
-          "message": "fix: add Docker configuration file support (fixes #105)",
-          "timestamp": "2025-07-31T11:17:36Z",
-          "url": "https://github.com/czlonkowski/n8n-mcp/pull/106/commits/55deb69bafd5b51b7f0101b4c66757afd1d11c6e"
-        },
-        "date": 1753961750181,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0188,
-            "unit": "ms",
-            "range": 0.24259999999999998,
-            "extra": "53071 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1489,
-            "unit": "ms",
-            "range": 0.5188000000000001,
-            "extra": "318 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0047,
-            "unit": "ms",
-            "range": 0.269,
-            "extra": "213473 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0662,
-            "unit": "ms",
-            "range": 0.3024,
-            "extra": "15106 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2460,6 +2412,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.5238,
             "extra": "14382 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "999e31b13a998276ceb9e4005d17ef1c34b21810",
+          "message": "Merge pull request #122 from qaribhaider/fix/n8n-compose-health-check\n\nUse wget since n8n image goes not have curl",
+          "timestamp": "2025-08-06T22:24:12+02:00",
+          "tree_id": "3bb9fe546936bffb83d86d7459279cd26bf7b033",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/999e31b13a998276ceb9e4005d17ef1c34b21810"
+        },
+        "date": 1754511940547,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.3024,
+            "extra": "53108 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1591,
+            "unit": "ms",
+            "range": 0.6127999999999996,
+            "extra": "317 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0049,
+            "unit": "ms",
+            "range": 0.2819,
+            "extra": "202554 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0659,
+            "unit": "ms",
+            "range": 0.29290000000000005,
+            "extra": "15164 ops/sec"
           }
         ]
       }

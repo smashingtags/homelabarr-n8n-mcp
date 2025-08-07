@@ -1,56 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754512866557,
+  "lastUpdate": 1754582678045,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "id": "9cd5e42cb7843fc1cd9e5406228500f14627f726",
-          "message": "fix: add Docker configuration file support (fixes #105)",
-          "timestamp": "2025-07-31T12:05:46Z",
-          "url": "https://github.com/czlonkowski/n8n-mcp/pull/106/commits/9cd5e42cb7843fc1cd9e5406228500f14627f726"
-        },
-        "date": 1753963812318,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0189,
-            "unit": "ms",
-            "range": 0.20550000000000002,
-            "extra": "52917 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.142,
-            "unit": "ms",
-            "range": 0.45020000000000016,
-            "extra": "318 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0047,
-            "unit": "ms",
-            "range": 0.2558,
-            "extra": "213868 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0694,
-            "unit": "ms",
-            "range": 0.42760000000000004,
-            "extra": "14407 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2468,6 +2420,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 5.9507,
             "extra": "5990 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "48986263bfc6198b7e840b3a1506013cde82f1fb",
+          "message": "Merge pull request #128 from czlonkowski/feature/fix-loop-output-confusion\n\nfix: resolve SplitInBatches output confusion for AI assistants",
+          "timestamp": "2025-08-07T18:02:49+02:00",
+          "tree_id": "e6e354d0dd7f794ed0f905f23bb1e09e09bc3e41",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/48986263bfc6198b7e840b3a1506013cde82f1fb"
+        },
+        "date": 1754582677402,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0192,
+            "unit": "ms",
+            "range": 0.4315,
+            "extra": "52125 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1696,
+            "unit": "ms",
+            "range": 0.6183999999999998,
+            "extra": "316 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0053,
+            "unit": "ms",
+            "range": 0.4015,
+            "extra": "187384 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0687,
+            "unit": "ms",
+            "range": 0.4667,
+            "extra": "14562 ops/sec"
           }
         ]
       }

@@ -1,56 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754595860025,
+  "lastUpdate": 1754981968660,
   "repoUrl": "https://github.com/czlonkowski/n8n-mcp",
   "entries": {
     "n8n-mcp Benchmarks": [
-      {
-        "commit": {
-          "author": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "committer": {
-            "name": "czlonkowski",
-            "username": "czlonkowski"
-          },
-          "id": "75a22163949e02c7ce14f8b3014cb273b2a49aef",
-          "message": "fix: add Docker configuration file support (fixes #105)",
-          "timestamp": "2025-07-31T12:38:48Z",
-          "url": "https://github.com/czlonkowski/n8n-mcp/pull/106/commits/75a22163949e02c7ce14f8b3014cb273b2a49aef"
-        },
-        "date": 1753966344492,
-        "tool": "customSmallerIsBetter",
-        "benches": [
-          {
-            "name": "sample - array sorting - small",
-            "value": 0.0187,
-            "unit": "ms",
-            "range": 0.2879,
-            "extra": "53404 ops/sec"
-          },
-          {
-            "name": "sample - array sorting - large",
-            "value": 3.1322,
-            "unit": "ms",
-            "range": 0.4101999999999997,
-            "extra": "319 ops/sec"
-          },
-          {
-            "name": "sample - string concatenation",
-            "value": 0.0047,
-            "unit": "ms",
-            "range": 0.2862,
-            "extra": "211887 ops/sec"
-          },
-          {
-            "name": "sample - object creation",
-            "value": 0.0659,
-            "unit": "ms",
-            "range": 0.3368,
-            "extra": "15167 ops/sec"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -2476,6 +2428,58 @@ window.BENCHMARK_DATA = {
             "unit": "ms",
             "range": 0.3611,
             "extra": "14485 ops/sec"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "56956555+czlonkowski@users.noreply.github.com",
+            "name": "Romuald Członkowski",
+            "username": "czlonkowski"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "baab3a02dc68c5d81e33f93bce0e5462d65a52d1",
+          "message": "Merge pull request #139 from czlonkowski/feature/validation-improvements\n\nchore: update n8n to v1.106.3 and bump version to 2.10.4",
+          "timestamp": "2025-08-12T08:57:47+02:00",
+          "tree_id": "eb0e009eb0f4f9b2b57fab8bd3ab6b4442e72ccc",
+          "url": "https://github.com/czlonkowski/n8n-mcp/commit/baab3a02dc68c5d81e33f93bce0e5462d65a52d1"
+        },
+        "date": 1754981968289,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "sample - array sorting - small",
+            "value": 0.0188,
+            "unit": "ms",
+            "range": 0.29259999999999997,
+            "extra": "53134 ops/sec"
+          },
+          {
+            "name": "sample - array sorting - large",
+            "value": 3.1485,
+            "unit": "ms",
+            "range": 0.4969000000000001,
+            "extra": "318 ops/sec"
+          },
+          {
+            "name": "sample - string concatenation",
+            "value": 0.0047,
+            "unit": "ms",
+            "range": 0.2574,
+            "extra": "213089 ops/sec"
+          },
+          {
+            "name": "sample - object creation",
+            "value": 0.0668,
+            "unit": "ms",
+            "range": 0.3621,
+            "extra": "14972 ops/sec"
           }
         ]
       }

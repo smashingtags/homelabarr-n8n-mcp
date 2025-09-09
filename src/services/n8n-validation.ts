@@ -94,10 +94,43 @@ export function cleanWorkflowForCreate(workflow: Partial<Workflow>): Partial<Wor
 }
 
 /**
+ * Clean settings object to remove properties not accepted by n8n API
+ */
+function cleanWorkflowSettings(settings: any): any {
+  if (!settings || typeof settings !== 'object') {
+    return settings;
+  }
+
+  // Only keep properties that are defined in the workflowSettingsSchema
+  const allowedSettingsKeys = [
+    'executionOrder',
+    'timezone', 
+    'saveDataErrorExecution',
+    'saveDataSuccessExecution',
+    'saveManualExecutions',
+    'saveExecutionProgress',
+    'executionTimeout',
+    'errorWorkflow'
+  ];
+
+  const cleanedSettings: any = {};
+  
+  for (const key of allowedSettingsKeys) {
+    if (key in settings && settings[key] !== undefined) {
+      cleanedSettings[key] = settings[key];
+    }
+  }
+
+  // Only return settings object if it has properties
+  return Object.keys(cleanedSettings).length > 0 ? cleanedSettings : undefined;
+}
+
+/**
  * Clean workflow data for update operations.
  * 
  * This function removes read-only and computed fields that should not be sent
- * in API update requests. It does NOT add any default values or new fields.
+ * in API update requests. It also filters the settings object to only include
+ * properties accepted by the n8n API schema.
  * 
  * Note: Unlike cleanWorkflowForCreate, this function does not add default settings.
  * The n8n API will reject update requests that include properties not present in
@@ -125,9 +158,24 @@ export function cleanWorkflowForUpdate(workflow: Workflow): Partial<Workflow> {
     triggerCount,
     shared,
     active,
+    // Remove newer API response fields that cause "additional properties" errors
+    homeProject,
+    scopes,
+    ownedBy,
+    // Remove project-related fields (enterprise features)
+    projects,
+    // Remove execution/stats fields
+    executionCount,
+    // Remove any other computed/display fields
+    hasCredentials,
     // Keep everything else
     ...cleanedWorkflow
   } = workflow as any;
+
+  // Clean the settings object to remove unsupported properties
+  if (cleanedWorkflow.settings) {
+    cleanedWorkflow.settings = cleanWorkflowSettings(cleanedWorkflow.settings);
+  }
 
   return cleanedWorkflow;
 }

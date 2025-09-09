@@ -270,6 +270,34 @@ export const n8nManagementTools: ToolDefinition[] = [
       required: ['id']
     }
   },
+  {
+    name: 'n8n_activate_workflow',
+    description: `Activate a workflow to enable automatic execution. Required for webhook workflows to receive requests.`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: { 
+          type: 'string', 
+          description: 'Workflow ID to activate' 
+        }
+      },
+      required: ['id']
+    }
+  },
+  {
+    name: 'n8n_deactivate_workflow',
+    description: `Deactivate a workflow to stop automatic execution. Webhook URLs will become inactive.`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: { 
+          type: 'string', 
+          description: 'Workflow ID to deactivate' 
+        }
+      },
+      required: ['id']
+    }
+  },
 
   // Execution Management Tools
   {

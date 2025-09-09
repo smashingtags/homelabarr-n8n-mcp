@@ -495,6 +495,8 @@ export class N8NDocumentationMCPServer {
       case 'n8n_get_workflow_minimal':
       case 'n8n_update_full_workflow':
       case 'n8n_delete_workflow':
+      case 'n8n_activate_workflow':
+      case 'n8n_deactivate_workflow':
       case 'n8n_validate_workflow':
       case 'n8n_get_execution':
       case 'n8n_delete_execution':
@@ -778,6 +780,12 @@ export class N8NDocumentationMCPServer {
       case 'n8n_list_workflows':
         // No required parameters
         return n8nHandlers.handleListWorkflows(args);
+      case 'n8n_activate_workflow':
+        this.validateToolParams(name, args, ['id']);
+        return n8nHandlers.handleActivateWorkflow(args);
+      case 'n8n_deactivate_workflow':
+        this.validateToolParams(name, args, ['id']);
+        return n8nHandlers.handleDeactivateWorkflow(args);
       case 'n8n_validate_workflow':
         this.validateToolParams(name, args, ['id']);
         await this.ensureInitialized();

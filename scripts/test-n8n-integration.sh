@@ -206,7 +206,7 @@ docker run -d \
   -e N8N_PROTOCOL=http \
   -e NODE_ENV=development \
   -e N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true \
-  n8nio/n8n:latest
+  n8nio/n8n:1.109.2
 
 # Wait for n8n to be ready
 echo -e "${YELLOW}⏳ Waiting for n8n to start...${NC}"

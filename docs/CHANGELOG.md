@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.10.9] - 2025-09-09
+
+### Updated
+- **n8n Dependencies**: Updated to latest versions for compatibility and new features
+  - n8n: 1.109.2 → 1.110.1
+  - n8n-core: 1.108.0 → 1.109.0
+  - n8n-workflow: 1.106.0 → 1.107.0
+  - @n8n/n8n-nodes-langchain: 1.108.1 → 1.109.1
+- **Node Database**: Rebuilt with 536 nodes from updated n8n packages
+- **Template Library**: Fetched 499 workflow templates from the last 12 months
+- All tests passing with updated dependencies
+
+### Fixed
+- **Test Resilience**: Made tests more resilient to dependency updates
+  - Use ranges instead of exact counts in diagnostic test to handle tool count variations
+  - Tests no longer fail when management tools count changes between versions
+- **Workflow Validation**: Enhanced `cleanWorkflowForUpdate` function
+  - Added `cleanWorkflowSettings` to properly filter settings object
+  - Remove properties that cause n8n API 'additional properties' errors
+  - Fixes issues #168, #159, #136 related to workflow update failures
+
 ## [2.10.8] - 2025-09-04
 
 ### Updated
@@ -1196,6 +1217,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic n8n and MCP integration
 - Core workflow automation features
 
+[2.10.9]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.8...v2.10.9
+[2.10.8]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.5...v2.10.8
+[2.10.5]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.4...v2.10.5
 [2.10.4]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.3...v2.10.4
 [2.10.3]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.2...v2.10.3
 [2.10.2]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.1...v2.10.2

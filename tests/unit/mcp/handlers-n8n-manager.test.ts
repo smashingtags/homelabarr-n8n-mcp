@@ -586,10 +586,10 @@ describe('handlers-n8n-manager', () => {
             enabled: true,
           },
           managementTools: {
-            count: 16,
+            count: 18,
             enabled: true,
           },
-          totalAvailable: 38,
+          totalAvailable: 40,
         },
       });
 

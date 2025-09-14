@@ -43,7 +43,7 @@ env:
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: read
       packages: write
@@ -89,7 +89,7 @@ jobs:
 
   test-image:
     needs: build-and-push
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: github.event_name != 'pull_request'
     permissions:
       contents: read
@@ -148,7 +148,7 @@ jobs:
 
   create-release:
     needs: [build-and-push, test-image]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: startsWith(github.ref, 'refs/tags/v')
     permissions:
       contents: write

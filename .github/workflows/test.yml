@@ -39,7 +39,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 10  # Add a 10-minute timeout to prevent hanging
     steps:
       - uses: actions/checkout@v4
@@ -249,7 +249,7 @@ jobs:
   # Separate job to process and publish test results
   publish-results:
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: always()
     permissions:
       checks: write

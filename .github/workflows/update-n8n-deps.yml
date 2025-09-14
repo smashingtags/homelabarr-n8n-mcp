@@ -21,7 +21,7 @@ on:
 
 jobs:
   check-and-update:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     
     permissions:
       contents: write
@@ -181,7 +181,7 @@ jobs:
   # Direct commit option (for manual trigger)
   direct-update:
     if: github.event_name == 'workflow_dispatch' && !inputs.create_pr
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     
     permissions:
       contents: write

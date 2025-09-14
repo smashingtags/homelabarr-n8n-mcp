@@ -25,7 +25,7 @@ env:
 jobs:
   detect-version-change:
     name: Detect Version Change
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     outputs:
       version-changed: ${{ steps.check.outputs.changed }}
       new-version: ${{ steps.check.outputs.version }}
@@ -81,7 +81,7 @@ jobs:
 
   extract-changelog:
     name: Extract Changelog
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: detect-version-change
     if: needs.detect-version-change.outputs.version-changed == 'true'
     outputs:
@@ -124,7 +124,7 @@ jobs:
 
   create-release:
     name: Create GitHub Release
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [detect-version-change, extract-changelog]
     if: needs.detect-version-change.outputs.version-changed == 'true'
     outputs:
@@ -208,7 +208,7 @@ jobs:
 
   build-and-test:
     name: Build and Test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: detect-version-change
     if: needs.detect-version-change.outputs.version-changed == 'true'
     steps:
@@ -240,7 +240,7 @@ jobs:
 
   publish-npm:
     name: Publish to NPM
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [detect-version-change, build-and-test, create-release]
     if: needs.detect-version-change.outputs.version-changed == 'true'
     steps:
@@ -323,7 +323,7 @@ jobs:
 
   build-docker:
     name: Build and Push Docker Images
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [detect-version-change, build-and-test]
     if: needs.detect-version-change.outputs.version-changed == 'true'
     permissions:
@@ -408,7 +408,7 @@ jobs:
 
   update-documentation:
     name: Update Documentation
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [detect-version-change, create-release, publish-npm, build-docker]
     if: needs.detect-version-change.outputs.version-changed == 'true' && !failure()
     steps:
@@ -458,7 +458,7 @@ jobs:
 
   notify-completion:
     name: Notify Release Completion
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [detect-version-change, create-release, publish-npm, build-docker, update-documentation]
     if: always() && needs.detect-version-change.outputs.version-changed == 'true'
     steps:

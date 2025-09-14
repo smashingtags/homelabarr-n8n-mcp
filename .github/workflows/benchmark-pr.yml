@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   benchmark-comparison:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout PR branch
         uses: actions/checkout@v4

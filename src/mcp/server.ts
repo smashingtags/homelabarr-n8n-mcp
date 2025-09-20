@@ -29,11 +29,12 @@ import { getToolDocumentation, getToolsOverview } from './tools-documentation';
 import { PROJECT_VERSION } from '../utils/version';
 import { normalizeNodeType, getNodeTypeAlternatives, getWorkflowNodeType } from '../utils/node-utils';
 import { ToolValidation, Validator, ValidationError } from '../utils/validation-schemas';
-import { 
-  negotiateProtocolVersion, 
+import {
+  negotiateProtocolVersion,
   logProtocolNegotiation,
-  STANDARD_PROTOCOL_VERSION 
+  STANDARD_PROTOCOL_VERSION
 } from '../utils/protocol-version';
+import { InstanceContext } from '../types/instance-context';
 
 interface NodeRow {
   node_type: string;
@@ -61,8 +62,10 @@ export class N8NDocumentationMCPServer {
   private initialized: Promise<void>;
   private cache = new SimpleCache();
   private clientInfo: any = null;
+  private instanceContext?: InstanceContext;
 
-  constructor() {
+  constructor(instanceContext?: InstanceContext) {
+    this.instanceContext = instanceContext;
     // Check for test environment first
     const envDbPath = process.env.NODE_DB_PATH;
     let dbPath: string | null = null;
@@ -213,13 +216,30 @@ export class N8NDocumentationMCPServer {
     this.server.setRequestHandler(ListToolsRequestSchema, async (request) => {
       // Combine documentation tools with management tools if API is configured
       let tools = [...n8nDocumentationToolsFinal];
-      const isConfigured = isN8nApiConfigured();
-      
-      if (isConfigured) {
+
+      // Check if n8n API tools should be available
+      // 1. Environment variables (backward compatibility)
+      // 2. Instance context (multi-tenant support)
+      // 3. Multi-tenant mode enabled (always show tools, runtime checks will handle auth)
+      const hasEnvConfig = isN8nApiConfigured();
+      const hasInstanceConfig = !!(this.instanceContext?.n8nApiUrl && this.instanceContext?.n8nApiKey);
+      const isMultiTenantEnabled = process.env.ENABLE_MULTI_TENANT === 'true';
+
+      const shouldIncludeManagementTools = hasEnvConfig || hasInstanceConfig || isMultiTenantEnabled;
+
+      if (shouldIncludeManagementTools) {
         tools.push(...n8nManagementTools);
-        logger.debug(`Tool listing: ${tools.length} tools available (${n8nDocumentationToolsFinal.length} documentation + ${n8nManagementTools.length} management)`);
+        logger.debug(`Tool listing: ${tools.length} tools available (${n8nDocumentationToolsFinal.length} documentation + ${n8nManagementTools.length} management)`, {
+          hasEnvConfig,
+          hasInstanceConfig,
+          isMultiTenantEnabled
+        });
       } else {
-        logger.debug(`Tool listing: ${tools.length} tools available (documentation only)`);
+        logger.debug(`Tool listing: ${tools.length} tools available (documentation only)`, {
+          hasEnvConfig,
+          hasInstanceConfig,
+          isMultiTenantEnabled
+        });
       }
       
       // Check if client is n8n (from initialization)
@@ -725,21 +745,46 @@ export class N8NDocumentationMCPServer {
       case 'get_node_as_tool_info':
         this.validateToolParams(name, args, ['nodeType']);
         return this.getNodeAsToolInfo(args.nodeType);
+      case 'list_templates':
+        // No required params
+        const listLimit = Math.min(Math.max(Number(args.limit) || 10, 1), 100);
+        const listOffset = Math.max(Number(args.offset) || 0, 0);
+        const sortBy = args.sortBy || 'views';
+        const includeMetadata = Boolean(args.includeMetadata);
+        return this.listTemplates(listLimit, listOffset, sortBy, includeMetadata);
       case 'list_node_templates':
         this.validateToolParams(name, args, ['nodeTypes']);
-        const templateLimit = args.limit !== undefined ? Number(args.limit) || 10 : 10;
-        return this.listNodeTemplates(args.nodeTypes, templateLimit);
+        const templateLimit = Math.min(Math.max(Number(args.limit) || 10, 1), 100);
+        const templateOffset = Math.max(Number(args.offset) || 0, 0);
+        return this.listNodeTemplates(args.nodeTypes, templateLimit, templateOffset);
       case 'get_template':
         this.validateToolParams(name, args, ['templateId']);
         const templateId = Number(args.templateId);
-        return this.getTemplate(templateId);
+        const mode = args.mode || 'full';
+        return this.getTemplate(templateId, mode);
       case 'search_templates':
         this.validateToolParams(name, args, ['query']);
-        const searchLimit = args.limit !== undefined ? Number(args.limit) || 20 : 20;
-        return this.searchTemplates(args.query, searchLimit);
+        const searchLimit = Math.min(Math.max(Number(args.limit) || 20, 1), 100);
+        const searchOffset = Math.max(Number(args.offset) || 0, 0);
+        const searchFields = args.fields as string[] | undefined;
+        return this.searchTemplates(args.query, searchLimit, searchOffset, searchFields);
       case 'get_templates_for_task':
         this.validateToolParams(name, args, ['task']);
-        return this.getTemplatesForTask(args.task);
+        const taskLimit = Math.min(Math.max(Number(args.limit) || 10, 1), 100);
+        const taskOffset = Math.max(Number(args.offset) || 0, 0);
+        return this.getTemplatesForTask(args.task, taskLimit, taskOffset);
+      case 'search_templates_by_metadata':
+        // No required params - all filters are optional
+        const metadataLimit = Math.min(Math.max(Number(args.limit) || 20, 1), 100);
+        const metadataOffset = Math.max(Number(args.offset) || 0, 0);
+        return this.searchTemplatesByMetadata({
+          category: args.category,
+          complexity: args.complexity,
+          maxSetupMinutes: args.maxSetupMinutes ? Number(args.maxSetupMinutes) : undefined,
+          minSetupMinutes: args.minSetupMinutes ? Number(args.minSetupMinutes) : undefined,
+          requiredService: args.requiredService,
+          targetAudience: args.targetAudience
+        }, metadataLimit, metadataOffset);
       case 'validate_workflow':
         this.validateToolParams(name, args, ['workflow']);
         return this.validateWorkflow(args.workflow, args.options);
@@ -753,57 +798,57 @@ export class N8NDocumentationMCPServer {
       // n8n Management Tools (if API is configured)
       case 'n8n_create_workflow':
         this.validateToolParams(name, args, ['name', 'nodes', 'connections']);
-        return n8nHandlers.handleCreateWorkflow(args);
+        return n8nHandlers.handleCreateWorkflow(args, this.instanceContext);
       case 'n8n_get_workflow':
         this.validateToolParams(name, args, ['id']);
-        return n8nHandlers.handleGetWorkflow(args);
+        return n8nHandlers.handleGetWorkflow(args, this.instanceContext);
       case 'n8n_get_workflow_details':
         this.validateToolParams(name, args, ['id']);
-        return n8nHandlers.handleGetWorkflowDetails(args);
+        return n8nHandlers.handleGetWorkflowDetails(args, this.instanceContext);
       case 'n8n_get_workflow_structure':
         this.validateToolParams(name, args, ['id']);
-        return n8nHandlers.handleGetWorkflowStructure(args);
+        return n8nHandlers.handleGetWorkflowStructure(args, this.instanceContext);
       case 'n8n_get_workflow_minimal':
         this.validateToolParams(name, args, ['id']);
-        return n8nHandlers.handleGetWorkflowMinimal(args);
+        return n8nHandlers.handleGetWorkflowMinimal(args, this.instanceContext);
       case 'n8n_update_full_workflow':
         this.validateToolParams(name, args, ['id']);
-        return n8nHandlers.handleUpdateWorkflow(args);
+        return n8nHandlers.handleUpdateWorkflow(args, this.instanceContext);
       case 'n8n_update_partial_workflow':
         this.validateToolParams(name, args, ['id', 'operations']);
-        return handleUpdatePartialWorkflow(args);
+        return handleUpdatePartialWorkflow(args, this.instanceContext);
       case 'n8n_delete_workflow':
         this.validateToolParams(name, args, ['id']);
-        return n8nHandlers.handleDeleteWorkflow(args);
+        return n8nHandlers.handleDeleteWorkflow(args, this.instanceContext);
       case 'n8n_list_workflows':
         // No required parameters
-        return n8nHandlers.handleListWorkflows(args);
+        return n8nHandlers.handleListWorkflows(args, this.instanceContext);
       case 'n8n_validate_workflow':
         this.validateToolParams(name, args, ['id']);
         await this.ensureInitialized();
         if (!this.repository) throw new Error('Repository not initialized');
-        return n8nHandlers.handleValidateWorkflow(args, this.repository);
+        return n8nHandlers.handleValidateWorkflow(args, this.repository, this.instanceContext);
       case 'n8n_trigger_webhook_workflow':
         this.validateToolParams(name, args, ['webhookUrl']);
-        return n8nHandlers.handleTriggerWebhookWorkflow(args);
+        return n8nHandlers.handleTriggerWebhookWorkflow(args, this.instanceContext);
       case 'n8n_get_execution':
         this.validateToolParams(name, args, ['id']);
-        return n8nHandlers.handleGetExecution(args);
+        return n8nHandlers.handleGetExecution(args, this.instanceContext);
       case 'n8n_list_executions':
         // No required parameters
-        return n8nHandlers.handleListExecutions(args);
+        return n8nHandlers.handleListExecutions(args, this.instanceContext);
       case 'n8n_delete_execution':
         this.validateToolParams(name, args, ['id']);
-        return n8nHandlers.handleDeleteExecution(args);
+        return n8nHandlers.handleDeleteExecution(args, this.instanceContext);
       case 'n8n_health_check':
         // No required parameters
-        return n8nHandlers.handleHealthCheck();
+        return n8nHandlers.handleHealthCheck(this.instanceContext);
       case 'n8n_list_available_tools':
         // No required parameters
-        return n8nHandlers.handleListAvailableTools();
+        return n8nHandlers.handleListAvailableTools(this.instanceContext);
       case 'n8n_diagnostic':
         // No required parameters
-        return n8nHandlers.handleDiagnostic({ params: { arguments: args } });
+        return n8nHandlers.handleDiagnostic({ params: { arguments: args } }, this.instanceContext);
         
       default:
         throw new Error(`Unknown tool: ${name}`);
@@ -1594,8 +1639,19 @@ Full documentation is being prepared. For now, use get_node_essentials for confi
       GROUP BY package_name
     `).all() as any[];
     
+    // Get template statistics
+    const templateStats = this.db!.prepare(`
+      SELECT 
+        COUNT(*) as total_templates,
+        AVG(views) as avg_views,
+        MIN(views) as min_views,
+        MAX(views) as max_views
+      FROM templates
+    `).get() as any;
+    
     return {
       totalNodes: stats.total,
+      totalTemplates: templateStats.total_templates || 0,
       statistics: {
         aiTools: stats.ai_tools,
         triggers: stats.triggers,
@@ -1604,6 +1660,12 @@ Full documentation is being prepared. For now, use get_node_essentials for confi
         documentationCoverage: Math.round((stats.with_docs / stats.total) * 100) + '%',
         uniquePackages: stats.packages,
         uniqueCategories: stats.categories,
+        templates: {
+          total: templateStats.total_templates || 0,
+          avgViews: Math.round(templateStats.avg_views || 0),
+          minViews: templateStats.min_views || 0,
+          maxViews: templateStats.max_views || 0
+        }
       },
       packageBreakdown: packages.map(pkg => ({
         package: pkg.package_name,
@@ -2300,76 +2362,95 @@ Full documentation is being prepared. For now, use get_node_essentials for confi
   }
   
   // Template-related methods
-  private async listNodeTemplates(nodeTypes: string[], limit: number = 10): Promise<any> {
+  private async listTemplates(limit: number = 10, offset: number = 0, sortBy: 'views' | 'created_at' | 'name' = 'views', includeMetadata: boolean = false): Promise<any> {
     await this.ensureInitialized();
     if (!this.templateService) throw new Error('Template service not initialized');
     
-    const templates = await this.templateService.listNodeTemplates(nodeTypes, limit);
+    const result = await this.templateService.listTemplates(limit, offset, sortBy, includeMetadata);
     
-    if (templates.length === 0) {
+    return {
+      ...result,
+      tip: result.items.length > 0 ? 
+        `Use get_template(templateId) to get full workflow details. Total: ${result.total} templates available.` :
+        "No templates found. Run 'npm run fetch:templates' to update template database"
+    };
+  }
+  
+  private async listNodeTemplates(nodeTypes: string[], limit: number = 10, offset: number = 0): Promise<any> {
+    await this.ensureInitialized();
+    if (!this.templateService) throw new Error('Template service not initialized');
+    
+    const result = await this.templateService.listNodeTemplates(nodeTypes, limit, offset);
+    
+    if (result.items.length === 0 && offset === 0) {
       return {
+        ...result,
         message: `No templates found using nodes: ${nodeTypes.join(', ')}`,
-        tip: "Try searching with more common nodes or run 'npm run fetch:templates' to update template database",
-        templates: []
+        tip: "Try searching with more common nodes or run 'npm run fetch:templates' to update template database"
       };
     }
     
     return {
-      templates,
-      count: templates.length,
-      tip: `Use get_template(templateId) to get the full workflow JSON for any template`
+      ...result,
+      tip: `Showing ${result.items.length} of ${result.total} templates. Use offset for pagination.`
     };
   }
   
-  private async getTemplate(templateId: number): Promise<any> {
+  private async getTemplate(templateId: number, mode: 'nodes_only' | 'structure' | 'full' = 'full'): Promise<any> {
     await this.ensureInitialized();
     if (!this.templateService) throw new Error('Template service not initialized');
     
-    const template = await this.templateService.getTemplate(templateId);
+    const template = await this.templateService.getTemplate(templateId, mode);
     
     if (!template) {
       return {
         error: `Template ${templateId} not found`,
-        tip: "Use list_node_templates or search_templates to find available templates"
+        tip: "Use list_templates, list_node_templates or search_templates to find available templates"
       };
     }
     
+    const usage = mode === 'nodes_only' ? "Node list for quick overview" :
+                  mode === 'structure' ? "Workflow structure without full details" :
+                  "Complete workflow JSON ready to import into n8n";
+    
     return {
+      mode,
       template,
-      usage: "Import this workflow JSON directly into n8n or use it as a reference for building workflows"
+      usage
     };
   }
   
-  private async searchTemplates(query: string, limit: number = 20): Promise<any> {
+  private async searchTemplates(query: string, limit: number = 20, offset: number = 0, fields?: string[]): Promise<any> {
     await this.ensureInitialized();
     if (!this.templateService) throw new Error('Template service not initialized');
     
-    const templates = await this.templateService.searchTemplates(query, limit);
+    const result = await this.templateService.searchTemplates(query, limit, offset, fields);
     
-    if (templates.length === 0) {
+    if (result.items.length === 0 && offset === 0) {
       return {
+        ...result,
         message: `No templates found matching: "${query}"`,
-        tip: "Try different keywords or run 'npm run fetch:templates' to update template database",
-        templates: []
+        tip: "Try different keywords or run 'npm run fetch:templates' to update template database"
       };
     }
     
     return {
-      templates,
-      count: templates.length,
-      query
+      ...result,
+      query,
+      tip: `Found ${result.total} templates matching "${query}". Showing ${result.items.length}.`
     };
   }
   
-  private async getTemplatesForTask(task: string): Promise<any> {
+  private async getTemplatesForTask(task: string, limit: number = 10, offset: number = 0): Promise<any> {
     await this.ensureInitialized();
     if (!this.templateService) throw new Error('Template service not initialized');
     
-    const templates = await this.templateService.getTemplatesForTask(task);
+    const result = await this.templateService.getTemplatesForTask(task, limit, offset);
     const availableTasks = this.templateService.listAvailableTasks();
     
-    if (templates.length === 0) {
+    if (result.items.length === 0 && offset === 0) {
       return {
+        ...result,
         message: `No templates found for task: ${task}`,
         availableTasks,
         tip: "Try a different task or use search_templates for custom searches"
@@ -2377,10 +2458,54 @@ Full documentation is being prepared. For now, use get_node_essentials for confi
     }
     
     return {
+      ...result,
       task,
-      templates,
-      count: templates.length,
-      description: this.getTaskDescription(task)
+      description: this.getTaskDescription(task),
+      tip: `${result.total} templates available for ${task}. Showing ${result.items.length}.`
+    };
+  }
+  
+  private async searchTemplatesByMetadata(filters: {
+    category?: string;
+    complexity?: 'simple' | 'medium' | 'complex';
+    maxSetupMinutes?: number;
+    minSetupMinutes?: number;
+    requiredService?: string;
+    targetAudience?: string;
+  }, limit: number = 20, offset: number = 0): Promise<any> {
+    await this.ensureInitialized();
+    if (!this.templateService) throw new Error('Template service not initialized');
+    
+    const result = await this.templateService.searchTemplatesByMetadata(filters, limit, offset);
+    
+    // Build filter summary for feedback
+    const filterSummary: string[] = [];
+    if (filters.category) filterSummary.push(`category: ${filters.category}`);
+    if (filters.complexity) filterSummary.push(`complexity: ${filters.complexity}`);
+    if (filters.maxSetupMinutes) filterSummary.push(`max setup: ${filters.maxSetupMinutes} min`);
+    if (filters.minSetupMinutes) filterSummary.push(`min setup: ${filters.minSetupMinutes} min`);
+    if (filters.requiredService) filterSummary.push(`service: ${filters.requiredService}`);
+    if (filters.targetAudience) filterSummary.push(`audience: ${filters.targetAudience}`);
+    
+    if (result.items.length === 0 && offset === 0) {
+      // Get available categories and audiences for suggestions
+      const availableCategories = await this.templateService.getAvailableCategories();
+      const availableAudiences = await this.templateService.getAvailableTargetAudiences();
+      
+      return {
+        ...result,
+        message: `No templates found with filters: ${filterSummary.join(', ')}`,
+        availableCategories: availableCategories.slice(0, 10),
+        availableAudiences: availableAudiences.slice(0, 5),
+        tip: "Try broader filters or different categories. Use list_templates to see all templates."
+      };
+    }
+    
+    return {
+      ...result,
+      filters,
+      filterSummary: filterSummary.join(', '),
+      tip: `Found ${result.total} templates matching filters. Showing ${result.items.length}. Each includes AI-generated metadata.`
     };
   }
   

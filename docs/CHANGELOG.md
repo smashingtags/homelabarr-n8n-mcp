@@ -7,6 +7,147 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.12.0] - 2025-09-19
+
+### Added
+- **Flexible Instance Configuration**: Complete multi-instance support for serving multiple n8n instances dynamically
+  - New `InstanceContext` interface for runtime configuration without multi-tenancy implications
+  - Dual-mode API client supporting both singleton (env vars) and instance-specific configurations
+  - LRU cache with SHA-256 hashing for secure client management (100 instances, 30-min TTL)
+  - Comprehensive input validation preventing injection attacks and invalid configurations
+  - Session context management in HTTP server for per-session instance configuration
+  - 100% backward compatibility - existing deployments work unchanged
+  - Full test coverage with 83 new tests covering security, caching, and validation
+
+### Security
+- **SHA-256 Cache Key Hashing**: All instance identifiers are hashed before caching
+- **Input Validation**: Comprehensive validation for URLs, API keys, and numeric parameters
+- **Secure Logging**: Sensitive data never logged, only partial hashes for debugging
+- **Memory Management**: LRU eviction and TTL prevent unbounded growth
+- **URL Validation**: Blocks dangerous protocols (file://, javascript://, etc.)
+
+### Performance
+- **Efficient Caching**: LRU cache with automatic cleanup reduces API client creation
+- **Fast Lookups**: SHA-256 hashed keys for O(1) cache access
+- **Memory Optimized**: Maximum 100 concurrent instances with 30-minute TTL
+- **Token Savings**: Reuses existing clients instead of recreating
+
+### Documentation
+- Added comprehensive [Flexible Instance Configuration Guide](./FLEXIBLE_INSTANCE_CONFIGURATION.md)
+- Detailed architecture, usage examples, and security considerations
+- Migration guide for existing deployments
+- Complete API documentation for InstanceContext
+
+## [2.11.3] - 2025-09-17
+
+### Fixed
+- **n8n_update_partial_workflow Tool**: Fixed critical bug where updateNode and updateConnection operations were using incorrect property name
+  - Changed from `changes` property to `updates` property to match documentation and expected behavior
+  - Resolves issue where AI agents would break workflow connections when updating nodes
+  - Fixes GitHub issues #159 (update_partial_workflow is invalid) and #168 (partial workflow update returns error)
+  - All related tests updated to use correct property name
+
+## [2.11.2] - 2025-09-16
+
+### Updated
+- **n8n Dependencies**: Updated to latest versions for compatibility and new features
+  - n8n: 1.110.1 → 1.111.0
+  - n8n-core: 1.109.0 → 1.110.0
+  - n8n-workflow: 1.107.0 → 1.108.0
+  - @n8n/n8n-nodes-langchain: 1.109.1 → 1.110.0
+- **Node Database**: Rebuilt with 535 nodes from updated n8n packages
+- **Templates**: Preserved all 2,598 workflow templates with metadata intact
+- All critical nodes validated successfully (httpRequest, code, slack, agent)
+- Test suite: 1,911 tests passing, 5 flaky performance tests failing (99.7% pass rate)
+
+## [2.11.1] - 2025-09-15
+
+### Added
+- **Optional Fields Parameter for search_templates**: Enhanced search_templates tool with field filtering capability
+  - New optional `fields` parameter accepts an array of field names to include in response
+  - Supported fields: 'id', 'name', 'description', 'author', 'nodes', 'views', 'created', 'url', 'metadata'
+  - Reduces response size by 70-98% when requesting only specific fields (e.g., just id and name)
+  - Maintains full backward compatibility - existing calls without fields parameter work unchanged
+  - Example: `search_templates({query: "slack", fields: ["id", "name"]})` returns minimal data
+  - Significantly improves AI agent performance by reducing token usage
+
+### Added
+- **Fuzzy Node Type Matching for Templates**: Improved template discovery with flexible node type resolution
+  - Templates can now be found using simple node names: `["slack"]` instead of `["n8n-nodes-base.slack"]`
+  - Accepts various input formats: bare names, partial prefixes, and case variations
+  - Automatically expands related node types: `["email"]` finds Gmail, email send, and related templates
+  - `["slack"]` also finds `slackTrigger` templates
+  - Case-insensitive matching: `["Slack"]`, `["WEBHOOK"]`, `["HttpRequest"]` all work
+  - Backward compatible - existing exact formats continue working
+  - Reduces failed queries by approximately 50%
+  - Added `template-node-resolver.ts` utility for node type resolution
+  - Added 23 tests for template node resolution
+- **Structured Template Metadata System**: Comprehensive metadata for intelligent template discovery
+  - Generated metadata for 2,534 templates (97.5% coverage) using OpenAI's batch API
+  - Rich metadata structure: categories, complexity, use cases, setup time, required services, key features, target audience
+  - New `search_templates_by_metadata` tool for advanced filtering by multiple criteria
+  - Enhanced `list_templates` tool with optional `includeMetadata` parameter
+  - Templates now always include descriptions in list responses
+  - Metadata enables filtering by complexity level (simple/medium/complex)
+  - Filter by estimated setup time ranges (5-480 minutes)
+  - Filter by required external services (OpenAI, Slack, Google, etc.)
+  - Filter by target audience (developers, marketers, analysts, etc.)
+  - Multiple filter combinations supported for precise template discovery
+  - SQLite JSON extraction for efficient metadata queries
+  - Batch processing with OpenAI's gpt-4o-mini model for cost efficiency
+  - Added comprehensive tool documentation for new metadata features
+  - New database columns: metadata_json, metadata_generated_at
+  - Repository methods for metadata search and filtering
+
+## [2.11.0] - 2025-01-14
+
+### Added
+- **Comprehensive Template Pagination**: All template search and list tools now return paginated responses
+  - Consistent `PaginatedResponse` format with `items`, `total`, `limit`, `offset`, and `hasMore` fields
+  - Customizable limits (1-100) and offset parameters for all template tools
+  - Count methods for accurate pagination information across all template queries
+- **New `list_templates` Tool**: Efficient browsing of all available templates
+  - Returns minimal data (id, name, views, nodeCount) for quick overview
+  - Supports sorting by views, created_at, or name
+  - Optimized for discovering templates without downloading full workflow data
+- **Flexible Template Retrieval Modes**: Enhanced `get_template` with three response modes
+  - `nodes_only`: Returns just node types and names (minimal tokens)
+  - `structure`: Returns nodes with positions and connections (moderate detail)
+  - `full`: Returns complete workflow JSON (default, maximum detail)
+  - Reduces token usage by 80-90% in minimal modes
+
+### Enhanced
+- **Template Database Compression**: Implemented gzip compression for workflow JSONs
+  - Workflow data compressed from ~75MB to 12.10MB (84% reduction)
+  - Database size reduced from 117MB to 48MB despite 5x more templates
+  - Transparent compression/decompression with base64 encoding
+  - No API changes - compression is handled internally
+- **Template Quality Filtering**: Automatic filtering of low-quality templates
+  - Templates with ≤10 views are excluded from the database
+  - Expanded coverage from 499 to 2,596 high-quality templates (5x increase)
+  - Filtered 4,505 raw templates down to 2,596 based on popularity
+  - Ensures AI agents work with proven, valuable workflows
+- **Enhanced Database Statistics**: Template metrics now included
+  - Shows total template count, average/min/max views
+  - Provides complete database overview including template coverage
+
+### Performance
+- **Database Optimization**: 59% size reduction while storing 5x more content
+  - Previous: ~40MB database with 499 templates
+  - Current: ~48MB database with 2,596 templates
+  - Without compression would be ~120MB+
+- **Token Efficiency**: 80-90% reduction in response size for minimal queries
+  - `list_templates`: ~10 tokens per template vs 100+ for full data
+  - `get_template` with `nodes_only`: Returns just essential node information
+  - Pagination prevents overwhelming responses for large result sets
+
+### Fixed
+- **Test Suite Compatibility**: Updated all tests for new template system
+  - Fixed parameter validation tests to expect new method signatures
+  - Updated integration tests to use templates with >10 views
+  - Removed redundant test files that were testing at wrong abstraction level
+  - All 1,700+ tests now passing
+
 ## [2.10.9] - 2025-01-09
 
 ### Changed
@@ -1209,6 +1350,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic n8n and MCP integration
 - Core workflow automation features
 
+[2.12.0]: https://github.com/czlonkowski/n8n-mcp/compare/v2.11.3...v2.12.0
+[2.11.3]: https://github.com/czlonkowski/n8n-mcp/compare/v2.11.2...v2.11.3
+[2.11.2]: https://github.com/czlonkowski/n8n-mcp/compare/v2.11.1...v2.11.2
+[2.11.1]: https://github.com/czlonkowski/n8n-mcp/compare/v2.11.0...v2.11.1
+[2.11.0]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.9...v2.11.0
+[2.10.9]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.8...v2.10.9
+[2.10.8]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.5...v2.10.8
+[2.10.5]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.4...v2.10.5
 [2.10.4]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.3...v2.10.4
 [2.10.3]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.2...v2.10.3
 [2.10.2]: https://github.com/czlonkowski/n8n-mcp/compare/v2.10.1...v2.10.2

@@ -15,17 +15,27 @@ import dotenv from 'dotenv';
 import { getStartupBaseUrl, formatEndpointUrls, detectBaseUrl } from './utils/url-detector';
 import { PROJECT_VERSION } from './utils/version';
 import { v4 as uuidv4 } from 'uuid';
+import { createHash } from 'crypto';
 import { isInitializeRequest } from '@modelcontextprotocol/sdk/types.js';
-import { 
-  negotiateProtocolVersion, 
+import {
+  negotiateProtocolVersion,
   logProtocolNegotiation,
-  STANDARD_PROTOCOL_VERSION 
+  STANDARD_PROTOCOL_VERSION
 } from './utils/protocol-version';
+import { InstanceContext, validateInstanceContext } from './types/instance-context';
 
 dotenv.config();
 
 // Protocol version constant - will be negotiated per client
 const DEFAULT_PROTOCOL_VERSION = STANDARD_PROTOCOL_VERSION;
+
+// Type-safe headers interface for multi-tenant support
+interface MultiTenantHeaders {
+  'x-n8n-url'?: string;
+  'x-n8n-key'?: string;
+  'x-instance-id'?: string;
+  'x-session-id'?: string;
+}
 
 // Session management constants
 const MAX_SESSIONS = 100;
@@ -47,11 +57,25 @@ interface SessionMetrics {
   lastCleanup: Date;
 }
 
+/**
+ * Extract multi-tenant headers in a type-safe manner
+ */
+function extractMultiTenantHeaders(req: express.Request): MultiTenantHeaders {
+  return {
+    'x-n8n-url': req.headers['x-n8n-url'] as string | undefined,
+    'x-n8n-key': req.headers['x-n8n-key'] as string | undefined,
+    'x-instance-id': req.headers['x-instance-id'] as string | undefined,
+    'x-session-id': req.headers['x-session-id'] as string | undefined,
+  };
+}
+
 export class SingleSessionHTTPServer {
   // Map to store transports by session ID (following SDK pattern)
   private transports: { [sessionId: string]: StreamableHTTPServerTransport } = {};
   private servers: { [sessionId: string]: N8NDocumentationMCPServer } = {};
   private sessionMetadata: { [sessionId: string]: { lastAccess: Date; createdAt: Date } } = {};
+  private sessionContexts: { [sessionId: string]: InstanceContext | undefined } = {};
+  private contextSwitchLocks: Map<string, Promise<void>> = new Map();
   private session: Session | null = null;  // Keep for SSE compatibility
   private consoleManager = new ConsoleManager();
   private expressServer: any;
@@ -93,7 +117,7 @@ export class SingleSessionHTTPServer {
   private cleanupExpiredSessions(): void {
     const now = Date.now();
     const expiredSessions: string[] = [];
-    
+
     // Check for expired sessions
     for (const sessionId in this.sessionMetadata) {
       const metadata = this.sessionMetadata[sessionId];
@@ -101,14 +125,23 @@ export class SingleSessionHTTPServer {
         expiredSessions.push(sessionId);
       }
     }
-    
+
+    // Also check for orphaned contexts (sessions that were removed but context remained)
+    for (const sessionId in this.sessionContexts) {
+      if (!this.sessionMetadata[sessionId]) {
+        // Context exists but session doesn't - clean it up
+        delete this.sessionContexts[sessionId];
+        logger.debug('Cleaned orphaned session context', { sessionId });
+      }
+    }
+
     // Remove expired sessions
     for (const sessionId of expiredSessions) {
       this.removeSession(sessionId, 'expired');
     }
-    
+
     if (expiredSessions.length > 0) {
-      logger.info('Cleaned up expired sessions', { 
+      logger.info('Cleaned up expired sessions', {
         removed: expiredSessions.length,
         remaining: this.getActiveSessionCount()
       });
@@ -126,9 +159,10 @@ export class SingleSessionHTTPServer {
         delete this.transports[sessionId];
       }
       
-      // Remove server and metadata
+      // Remove server, metadata, and context
       delete this.servers[sessionId];
       delete this.sessionMetadata[sessionId];
+      delete this.sessionContexts[sessionId];
       
       logger.info('Session removed', { sessionId, reason });
     } catch (error) {
@@ -201,7 +235,55 @@ export class SingleSessionHTTPServer {
       this.sessionMetadata[sessionId].lastAccess = new Date();
     }
   }
-  
+
+  /**
+   * Switch session context with locking to prevent race conditions
+   */
+  private async switchSessionContext(sessionId: string, newContext: InstanceContext): Promise<void> {
+    // Check if there's already a switch in progress for this session
+    const existingLock = this.contextSwitchLocks.get(sessionId);
+    if (existingLock) {
+      // Wait for the existing switch to complete
+      await existingLock;
+      return;
+    }
+
+    // Create a promise for this switch operation
+    const switchPromise = this.performContextSwitch(sessionId, newContext);
+    this.contextSwitchLocks.set(sessionId, switchPromise);
+
+    try {
+      await switchPromise;
+    } finally {
+      // Clean up the lock after completion
+      this.contextSwitchLocks.delete(sessionId);
+    }
+  }
+
+  /**
+   * Perform the actual context switch
+   */
+  private async performContextSwitch(sessionId: string, newContext: InstanceContext): Promise<void> {
+    const existingContext = this.sessionContexts[sessionId];
+
+    // Only switch if the context has actually changed
+    if (JSON.stringify(existingContext) !== JSON.stringify(newContext)) {
+      logger.info('Multi-tenant shared mode: Updating instance context for session', {
+        sessionId,
+        oldInstanceId: existingContext?.instanceId,
+        newInstanceId: newContext.instanceId
+      });
+
+      // Update the session context
+      this.sessionContexts[sessionId] = newContext;
+
+      // Update the MCP server's instance context if it exists
+      if (this.servers[sessionId]) {
+        (this.servers[sessionId] as any).instanceContext = newContext;
+      }
+    }
+  }
+
   /**
    * Get session metrics for monitoring
    */
@@ -301,8 +383,16 @@ export class SingleSessionHTTPServer {
 
   /**
    * Handle incoming MCP request using proper SDK pattern
+   *
+   * @param req - Express request object
+   * @param res - Express response object
+   * @param instanceContext - Optional instance-specific configuration
    */
-  async handleRequest(req: express.Request, res: express.Response): Promise<void> {
+  async handleRequest(
+    req: express.Request,
+    res: express.Response,
+    instanceContext?: InstanceContext
+  ): Promise<void> {
     const startTime = Date.now();
     
     // Wrap all operations to prevent console interference
@@ -346,10 +436,37 @@ export class SingleSessionHTTPServer {
           
           // For initialize requests: always create new transport and server
           logger.info('handleRequest: Creating new transport for initialize request');
-          
-          // Use client-provided session ID or generate one if not provided
-          const sessionIdToUse = sessionId || uuidv4();
-          const server = new N8NDocumentationMCPServer();
+
+          // Generate session ID based on multi-tenant configuration
+          let sessionIdToUse: string;
+
+          const isMultiTenantEnabled = process.env.ENABLE_MULTI_TENANT === 'true';
+          const sessionStrategy = process.env.MULTI_TENANT_SESSION_STRATEGY || 'instance';
+
+          if (isMultiTenantEnabled && sessionStrategy === 'instance' && instanceContext?.instanceId) {
+            // In multi-tenant mode with instance strategy, create session per instance
+            // This ensures each tenant gets isolated sessions
+            // Include configuration hash to prevent collisions with different configs
+            const configHash = createHash('sha256')
+              .update(JSON.stringify({
+                url: instanceContext.n8nApiUrl,
+                instanceId: instanceContext.instanceId
+              }))
+              .digest('hex')
+              .substring(0, 8);
+
+            sessionIdToUse = `instance-${instanceContext.instanceId}-${configHash}-${uuidv4()}`;
+            logger.info('Multi-tenant mode: Creating instance-specific session', {
+              instanceId: instanceContext.instanceId,
+              configHash,
+              sessionId: sessionIdToUse
+            });
+          } else {
+            // Use client-provided session ID or generate a standard one
+            sessionIdToUse = sessionId || uuidv4();
+          }
+
+          const server = new N8NDocumentationMCPServer(instanceContext);
           
           transport = new StreamableHTTPServerTransport({
             sessionIdGenerator: () => sessionIdToUse,
@@ -361,11 +478,12 @@ export class SingleSessionHTTPServer {
               this.transports[initializedSessionId] = transport;
               this.servers[initializedSessionId] = server;
               
-              // Store session metadata
+              // Store session metadata and context
               this.sessionMetadata[initializedSessionId] = {
                 lastAccess: new Date(),
                 createdAt: new Date()
               };
+              this.sessionContexts[initializedSessionId] = instanceContext;
             }
           });
           
@@ -411,7 +529,16 @@ export class SingleSessionHTTPServer {
           // For non-initialize requests: reuse existing transport for this session
           logger.info('handleRequest: Reusing existing transport for session', { sessionId });
           transport = this.transports[sessionId];
-          
+
+          // In multi-tenant shared mode, update instance context if provided
+          const isMultiTenantEnabled = process.env.ENABLE_MULTI_TENANT === 'true';
+          const sessionStrategy = process.env.MULTI_TENANT_SESSION_STRATEGY || 'instance';
+
+          if (isMultiTenantEnabled && sessionStrategy === 'shared' && instanceContext) {
+            // Update the context for this session with locking to prevent race conditions
+            await this.switchSessionContext(sessionId, instanceContext);
+          }
+
           // Update session access time
           this.updateSessionAccess(sessionId);
           
@@ -978,8 +1105,59 @@ export class SingleSessionHTTPServer {
         sessionType: this.session?.isSSE ? 'SSE' : 'StreamableHTTP',
         sessionInitialized: this.session?.initialized
       });
-      
-      await this.handleRequest(req, res);
+
+      // Extract instance context from headers if present (for multi-tenant support)
+      const instanceContext: InstanceContext | undefined = (() => {
+        // Use type-safe header extraction
+        const headers = extractMultiTenantHeaders(req);
+        const hasUrl = headers['x-n8n-url'];
+        const hasKey = headers['x-n8n-key'];
+
+        if (!hasUrl && !hasKey) return undefined;
+
+        // Create context with proper type handling
+        const context: InstanceContext = {
+          n8nApiUrl: hasUrl || undefined,
+          n8nApiKey: hasKey || undefined,
+          instanceId: headers['x-instance-id'] || undefined,
+          sessionId: headers['x-session-id'] || undefined
+        };
+
+        // Add metadata if available
+        if (req.headers['user-agent'] || req.ip) {
+          context.metadata = {
+            userAgent: req.headers['user-agent'] as string | undefined,
+            ip: req.ip
+          };
+        }
+
+        // Validate the context
+        const validation = validateInstanceContext(context);
+        if (!validation.valid) {
+          logger.warn('Invalid instance context from headers', {
+            errors: validation.errors,
+            hasUrl: !!hasUrl,
+            hasKey: !!hasKey
+          });
+          return undefined;
+        }
+
+        return context;
+      })();
+
+      // Log context extraction for debugging (only if context exists)
+      if (instanceContext) {
+        // Use sanitized logging for security
+        logger.debug('Instance context extracted from headers', {
+          hasUrl: !!instanceContext.n8nApiUrl,
+          hasKey: !!instanceContext.n8nApiKey,
+          instanceId: instanceContext.instanceId ? instanceContext.instanceId.substring(0, 8) + '...' : undefined,
+          sessionId: instanceContext.sessionId ? instanceContext.sessionId.substring(0, 8) + '...' : undefined,
+          urlDomain: instanceContext.n8nApiUrl ? new URL(instanceContext.n8nApiUrl).hostname : undefined
+        });
+      }
+
+      await this.handleRequest(req, res, instanceContext);
       
       logger.info('POST /mcp request completed - checking response status', {
         responseHeadersSent: res.headersSent,

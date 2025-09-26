@@ -22,7 +22,8 @@ import {
   getNodeForTaskDoc, 
   listNodeTemplatesDoc, 
   getTemplateDoc, 
-  searchTemplatesDoc, 
+  searchTemplatesDoc,
+  searchTemplatesByMetadataDoc, 
   getTemplatesForTaskDoc 
 } from './templates';
 import { 
@@ -42,6 +43,7 @@ import {
   n8nDeleteWorkflowDoc,
   n8nListWorkflowsDoc,
   n8nValidateWorkflowDoc,
+  n8nAutofixWorkflowDoc,
   n8nTriggerWebhookWorkflowDoc,
   n8nGetExecutionDoc,
   n8nListExecutionsDoc,
@@ -83,6 +85,7 @@ export const toolsDocumentation: Record<string, ToolDocumentation> = {
   list_node_templates: listNodeTemplatesDoc,
   get_template: getTemplateDoc,
   search_templates: searchTemplatesDoc,
+  search_templates_by_metadata: searchTemplatesByMetadataDoc,
   get_templates_for_task: getTemplatesForTaskDoc,
   
   // Workflow Management tools (n8n API)
@@ -96,6 +99,7 @@ export const toolsDocumentation: Record<string, ToolDocumentation> = {
   n8n_delete_workflow: n8nDeleteWorkflowDoc,
   n8n_list_workflows: n8nListWorkflowsDoc,
   n8n_validate_workflow: n8nValidateWorkflowDoc,
+  n8n_autofix_workflow: n8nAutofixWorkflowDoc,
   n8n_trigger_webhook_workflow: n8nTriggerWebhookWorkflowDoc,
   n8n_get_execution: n8nGetExecutionDoc,
   n8n_list_executions: n8nListExecutionsDoc,

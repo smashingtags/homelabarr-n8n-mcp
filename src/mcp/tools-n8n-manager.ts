@@ -160,7 +160,7 @@ export const n8nManagementTools: ToolDefinition[] = [
   },
   {
     name: 'n8n_update_partial_workflow',
-    description: `Update workflow incrementally with diff operations. Max 5 ops. Types: addNode, removeNode, updateNode, moveNode, enable/disableNode, addConnection, removeConnection, updateSettings, updateName, add/removeTag. See tools_documentation("n8n_update_partial_workflow", "full") for details.`,
+    description: `Update workflow incrementally with diff operations. Types: addNode, removeNode, updateNode, moveNode, enable/disableNode, addConnection, removeConnection, updateSettings, updateName, add/removeTag. See tools_documentation("n8n_update_partial_workflow", "full") for details.`,
     inputSchema: {
       type: 'object',
       additionalProperties: true,  // Allow any extra properties Claude Desktop might add
@@ -265,6 +265,41 @@ export const n8nManagementTools: ToolDefinition[] = [
               description: 'Validation profile to use (default: runtime)' 
             }
           }
+        }
+      },
+      required: ['id']
+    }
+  },
+  {
+    name: 'n8n_autofix_workflow',
+    description: `Automatically fix common workflow validation errors. Preview fixes or apply them. Fixes expression format, typeVersion, error output config, webhook paths.`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string',
+          description: 'Workflow ID to fix'
+        },
+        applyFixes: {
+          type: 'boolean',
+          description: 'Apply fixes to workflow (default: false - preview mode)'
+        },
+        fixTypes: {
+          type: 'array',
+          description: 'Types of fixes to apply (default: all)',
+          items: {
+            type: 'string',
+            enum: ['expression-format', 'typeversion-correction', 'error-output-config', 'node-type-correction', 'webhook-missing-path']
+          }
+        },
+        confidenceThreshold: {
+          type: 'string',
+          enum: ['high', 'medium', 'low'],
+          description: 'Minimum confidence level for fixes (default: medium)'
+        },
+        maxFixes: {
+          type: 'number',
+          description: 'Maximum number of fixes to apply (default: 50)'
         }
       },
       required: ['id']

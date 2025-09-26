@@ -41,17 +41,6 @@ export class WorkflowDiffEngine {
     request: WorkflowDiffRequest
   ): Promise<WorkflowDiffResult> {
     try {
-      // Limit operations to keep complexity manageable
-      if (request.operations.length > 5) {
-        return {
-          success: false,
-          errors: [{
-            operation: -1,
-            message: 'Too many operations. Maximum 5 operations allowed per request to ensure transactional integrity.'
-          }]
-        };
-      }
-
       // Clone workflow to avoid modifying original
       const workflowCopy = JSON.parse(JSON.stringify(workflow));
       
@@ -453,8 +442,8 @@ export class WorkflowDiffEngine {
     const node = this.findNode(workflow, operation.nodeId, operation.nodeName);
     if (!node) return;
     
-    // Apply changes using dot notation
-    Object.entries(operation.changes).forEach(([path, value]) => {
+    // Apply updates using dot notation
+    Object.entries(operation.updates).forEach(([path, value]) => {
       this.setNestedProperty(node, path, value);
     });
   }
@@ -545,18 +534,18 @@ export class WorkflowDiffEngine {
       type: 'removeConnection',
       source: operation.source,
       target: operation.target,
-      sourceOutput: operation.changes.sourceOutput,
-      targetInput: operation.changes.targetInput
+      sourceOutput: operation.updates.sourceOutput,
+      targetInput: operation.updates.targetInput
     });
     
     this.applyAddConnection(workflow, {
       type: 'addConnection',
       source: operation.source,
       target: operation.target,
-      sourceOutput: operation.changes.sourceOutput,
-      targetInput: operation.changes.targetInput,
-      sourceIndex: operation.changes.sourceIndex,
-      targetIndex: operation.changes.targetIndex
+      sourceOutput: operation.updates.sourceOutput,
+      targetInput: operation.updates.targetInput,
+      sourceIndex: operation.updates.sourceIndex,
+      targetIndex: operation.updates.targetIndex
     });
   }
 
